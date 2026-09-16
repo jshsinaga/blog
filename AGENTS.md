@@ -20,7 +20,7 @@ How to behave:
 
 Personal blog built with Astro, Tailwind CSS, Astro Content Collections, and Bun.
 
-Note: Astro is pinned to 7.2.0. Do not downgrade. Earlier 6.x versions fail to build this project (see the Giscus section below for context on why).
+Note: Astro is pinned to 7.2.0. Do not downgrade. Earlier 6.x versions fail to build this project.
 
 Main folders:
 
@@ -70,7 +70,7 @@ bun run build
 - Avoid adding large dependencies unless clear benefit exists.
 - Keep dark mode classes paired with light mode classes.
 - Do not reintroduce Nuxt, Vue, Nuxt UI, or Nuxt config.
-- The site does not use view transitions (no `<ClientRouter />`); every navigation is a full page load. Inline scripts run once per page load on a fresh `document`, so no cross-navigation listener de-duplication is needed. If you ever reintroduce view transitions, you must de-duplicate document-level listeners/observers across navigations (see git history for the previous `window.__*` pattern).
+- The site does not use view transitions. If they are reintroduced, make sure document-level scripts and observers do not run more than once across navigations.
 
 ## Design standards
 
@@ -82,88 +82,19 @@ bun run build
 - Prefer calm neutral colors.
 - Keep animations subtle.
 
-## Site search (Pagefind)
+## Technical implementation
 
-Full-site search is powered by Pagefind. The index is generated at build time by the `postbuild` script (`pagefind --site dist`), so it only exists after `bun run build`.
-
-- UI lives in `src/components/SearchModal.astro`, opened from the header search button (`#search-open`) or the `/` keyboard shortcut.
-- The Pagefind JS API is loaded lazily with a `/* @vite-ignore */` dynamic import of `/pagefind/pagefind.js`. In dev there is no index yet, so the modal shows a hint message instead.
-- The modal script binds once on page load (full page loads only, no view transitions).
-- Keep the header button id (`search-open`) in sync with the modal script.
-
-## Images
-
-Featured post images (the `image` frontmatter field) are stored in `src/assets/blogs/` and optimized by astro:assets (resize + WebP + responsive srcset). The frontmatter path mirrors the folder structure:
-
-```txt
-file:         src/assets/blogs/4.my-post-slug/cover.png
-frontmatter:  image: /4.my-post-slug/cover.png
-```
-
-- `src/utils/postImages.ts` maps frontmatter paths to `ImageMetadata` via `import.meta.glob`. `PostCard` and `BlogHeader` render optimized WebP variants; the social/OG image is generated with `getImage()` (1200x630 WebP) in `src/pages/blogs/[...slug].astro`, falling back to frontmatter `ogImage`/`image`.
-- `postImage()` logs a build warning when a frontmatter path does not resolve. Do not ignore it: it means the file is missing or the path does not mirror `src/assets/blogs`.
-- Screenshots inside post bodies stay in `public` and are referenced from root (e.g. `/4.my-post-slug/shot1.png`). They are served as-is. Never delete a `public` image that a post body still references.
-- Full content-creation rules live in `BLOG_CREATE.md`.
-
-## Tag pages
-
-- Static tag archives are generated from `src/pages/tags/`: `/tags` lists every tag with post counts, `/tags/[tag]` lists the posts for one tag.
-- Tag URLs use `tagSlug()` from `src/utils/helper.ts` (lowercase, hyphens). Keep tag slugs stable once published; tags on `PostCard` and `BlogHeader` link to `/tags/[tag]`.
-
-## Code copy buttons
-
-`src/components/CodeBlockEnhancer.astro` (rendered once in `BaseLayout`) adds a language label and a "Copy" button to every rendered `<pre>` code block at runtime. New posts need no extra work; just use normal fenced code blocks with a language tag.
-
-## Comments (Giscus)
-
-Blog posts show a comment section powered by Giscus, which stores comments as GitHub Discussions in the `jo0707/blog` repo. Visitors need a GitHub account to comment.
-
-The widget lives in `src/components/CommentSection.astro` and is rendered on every blog post by `src/pages/blogs/[...slug].astro`.
-
-Current Giscus config (keep in sync with the giscus.app wizard):
-
-```txt
-repo: jo0707/blog
-repo-id: R_kgDOPFwa2Q   (repo node_id from the GitHub API)
-category: Announcements  (only maintainers can create threads; anyone can comment)
-category-id: DIC_kwDOPFwa2c4DC7Ta
-mapping: pathname
-strict: 0
-reactions: on
-input-position: bottom
-lang: en
-```
-
-Dark mode sync:
-
-- The site toggles a `dark` class on `<html>`.
-- Initial Giscus load uses `data-theme="preferred_color_scheme"`.
-- An inline script in `CommentSection.astro` observes class changes on `document.documentElement` with a `MutationObserver` and posts `{ giscus: { setConfig: { theme } } }` to the `iframe.giscus-frame` (targetOrigin `https://giscus.app`) so comments follow the manual dark/light toggle.
-- If you change the theme toggle logic in `Header.astro`, keep this observer in sync.
-
-If the config ever needs regenerating:
-
-1. Enable Discussions on the repo (Settings, General, Discussions).
-2. Install the giscus GitHub App on `jo0707/blog` only.
-3. Open giscus.app, pick the repo and the Announcements category, and copy `data-repo-id` and `data-category-id` into the component defaults.
-
-Do not change the `mapping` or post URLs casually: Giscus ties each discussion to the page pathname, so a URL change orphans the comment thread.
+- **Search:** Pagefind indexes the site during `postbuild`, so search results exist only after `bun run build`. Keep the header search button id (`search-open`) synchronized with `SearchModal.astro`.
+- **Images:** Store featured images under `src/assets/blogs/` using matching frontmatter paths. Fix unresolved image warnings, and keep post-body screenshots in `public` without deleting referenced files. See `BLOG_CREATE.md` for content-image rules.
+- **Tags:** Use `tagSlug()` for lowercase, hyphenated tag URLs and keep published tag slugs stable.
+- **Code blocks:** Use normal fenced code blocks with language tags; `CodeBlockEnhancer.astro` adds labels and Copy buttons.
+- **SEO and feeds:** Keep titles, descriptions, canonical URLs, RSS, sitemap, social images, and RSS auto-discovery working.
 
 ## Content creation
 
 - Unfinished posts live in `./draft/` (one Markdown file per draft). Whenever the session mode is "Create a blog post", check `./draft/` first and offer existing drafts as the initial option before starting a new post.
 - Publishing a draft means moving it from `./draft/` to `src/content/blogs` and applying `BLOG_CREATE.md` (next file number, frontmatter, featured image, tone, checklist, validation).
 - All rules for writing blog posts (frontmatter, file naming, images, tone, structure, checklist, and validation) live in `BLOG_CREATE.md` at the project root. Read it and follow it whenever the session mode is "Create a blog post".
-
-## SEO standards
-
-- Use descriptive titles.
-- Keep descriptions concise.
-- Prefer one clear topic per post.
-- Use canonical URLs from existing layout behavior.
-- Keep RSS working: the feed (`src/pages/rss.xml.ts`) includes full post content rendered with markdown-it and absolute URLs. Don't break body image paths or move files referenced by post bodies out of `public`.
-- Keep sitemap generation working.
-- `og:image`/`twitter:image` are generated from the optimized featured image (1200x630 WebP) in `[...slug].astro`; RSS auto-discovery (`<link rel="alternate" type="application/rss+xml">`) lives in `BaseLayout`.
 
 ## Safety rules
 

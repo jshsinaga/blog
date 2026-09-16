@@ -8,7 +8,7 @@ const navItems = [
   { href: '/', label: 'Home', icon: 'heroicons:home' },
   { href: '/blogs', label: 'Posts', icon: 'heroicons:document-text' },
   { href: '/about', label: 'About', icon: 'heroicons:user' },
-  { href: 'https://itsjo.works', label: 'Jo', icon: 'mdi:web-box', external: true },
+  { href: 'https://itsjo.dev', label: 'Jo', icon: 'mdi:web-box', external: true },
 ];
 
 const isActive = (href: string) => href === '/' ? pathname === '/' : href.startsWith('/') && pathname.startsWith(href);
