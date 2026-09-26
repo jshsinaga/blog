@@ -1,0 +1,149 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import heroPortrait from '@/assets/hero/joshua-mountains.jpg';
+import { seoData, socialLinks } from '@/data';
+const socials = [
+  { href: socialLinks.githubLink, label: 'GitHub', icon: 'mdi:github' },
+  { href: socialLinks.linkedinLink, label: 'LinkedIn', icon: 'mdi:linkedin' },
+  { href: socialLinks.instagramLink, label: 'Instagram', icon: 'mdi:instagram' },
+  { href: `mailto:${seoData.mailAddress}`, label: 'Email Joshua', icon: 'mdi:email' },
+];
+---
+
+<section id="home" class="portfolio-hero" aria-labelledby="hero-title">
+  <div class="hero-canvas">
+    <div class="hero-copy hero-enter">
+      <p class="hero-eyebrow">Web &amp; mobile developer</p>
+      <h1 id="hero-title">
+        <span>Building</span>
+        <span>digital experiences</span>
+        <span>that <em>matter.</em></span>
+      </h1>
+      <p class="hero-description">I'm Joshua Palti Sinaga, a full-stack developer crafting modern web and mobile apps, with a focus on real impact.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="work-link">
+          <span class="work-arrow" aria-hidden="true"><Icon name="heroicons:arrow-right" class="h-5 w-5" /></span>
+          <span class="text-link">View my work</span>
+        </a>
+        <a href="#about" class="about-link text-link">About me</a>
+      </div>
+    </div>
+    <div class="hero-art hero-enter hero-enter-2">
+      <Image
+        src={heroPortrait}
+        alt="Joshua Palti Sinaga standing in a garden with mountains behind him"
+        widths={[360, 540, 800, 1080]}
+        sizes="(max-width: 700px) 82vw, 31vw"
+        width={800}
+        class="portrait hero-photo"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <img src="/logo.png" alt="Joshua Palti Sinaga logo" width="512" height="512" class="portrait hero-logo" />
+      <button type="button" class="portrait-toggle" aria-label="Pause hero animation" aria-pressed="false">
+        <Icon name="heroicons:pause" class="pause-icon h-4 w-4" />
+        <Icon name="heroicons:play" class="play-icon h-4 w-4" />
+      </button>
+    </div>
+    <div class="hero-footer">
+      <div class="hero-socials">
+        {socials.map((social) => (
+          <a href={social.href} target={social.href.startsWith('mailto:') ? undefined : '_blank'} rel="noreferrer" aria-label={social.label}>
+            <Icon name={social.icon} class="h-5 w-5" />
+          </a>
+        ))}
+      </div>
+      <p class="hero-location"><span aria-hidden="true"></span>Based in<br />Indonesia</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const portraitToggle = document.querySelector<HTMLButtonElement>('.portrait-toggle');
+  const heroArt = document.querySelector<HTMLElement>('.hero-art');
+
+  portraitToggle?.addEventListener('click', () => {
+    if (!heroArt) return;
+    const isPaused = heroArt.classList.toggle('is-paused');
+    portraitToggle.setAttribute('aria-pressed', String(isPaused));
+    portraitToggle.setAttribute('aria-label', isPaused ? 'Resume hero animation' : 'Pause hero animation');
+  });
+</script>
+
+<style>
+  .portfolio-hero { position: relative; isolation: isolate; overflow: hidden; background: #f9f9f8; color: #202222; }
+  .hero-canvas { position: relative; max-width: 1440px; margin-inline: auto; min-height: 740px; height: calc(100svh - 92px); max-height: 1080px; }
+  .hero-copy { position: relative; z-index: 2; padding-top: clamp(130px, 17vh, 205px); margin-left: 8.5%; width: 49%; }
+  .hero-eyebrow { margin-bottom: 16px; font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: #767b7e; }
+  h1 { font-size: clamp(42px, 4.65vw, 67px); font-weight: 400; line-height: 1.09; letter-spacing: -.055em; }
+  h1 span { display: block; }
+  h1 em { font-weight: 300; color: #929493; }
+  .hero-description { margin-top: 36px; max-width: 395px; font-size: 18px; line-height: 1.45; color: #747777; }
+  .hero-actions { display: flex; align-items: center; gap: 55px; margin-top: 43px; font-size: 14px; }
+  .work-link { display: inline-flex; align-items: center; gap: 21px; font-weight: 500; }
+  .work-arrow { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: linear-gradient(145deg, #3b3e3e, #141616); color: #fff; transition: transform 220ms; box-shadow: inset 0 1px 2px #ffffff40; }
+  .work-link:hover .work-arrow { transform: rotate(-35deg); }
+  .text-link { text-decoration: underline; text-decoration-color: #dedfdd; text-underline-offset: 7px; transition: color 200ms, text-decoration-color 200ms; }
+  .text-link:hover { color: #777; text-decoration-color: currentColor; }
+  .about-link { color: #696d6c; }
+  .hero-art { position: absolute; top: 9%; right: 8.5%; width: 31%; height: 70%; border-radius: 18px; overflow: hidden; background: #151717; }
+  .portrait { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 70%; }
+  .hero-logo { position: absolute; inset: 0; padding: 15%; object-fit: contain; object-position: center; background: #151717; clip-path: inset(0 100% 0 0); animation: portrait-logo-wipe 10s cubic-bezier(.76, 0, .24, 1) infinite; }
+  .portrait-toggle { position: absolute; z-index: 1; right: 14px; bottom: 14px; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #ffffff50; border-radius: 50%; background: #151717cc; color: white; cursor: pointer; }
+  .portrait-toggle .play-icon { display: none; }
+  .hero-art.is-paused .portrait { animation-play-state: paused; }
+  .hero-art.is-paused .pause-icon { display: none; }
+  .hero-art.is-paused .play-icon { display: block; }
+  /* Reveal from left to right, hold, then continue the wipe in the same direction.
+     The photo stays beneath the logo so the frame never flashes or goes blank. */
+  @keyframes portrait-logo-wipe {
+    0%, 40% { clip-path: inset(0 100% 0 0); }
+    49%, 85% { clip-path: inset(0 0 0 0); }
+    94%, 100% { clip-path: inset(0 0 0 100%); }
+  }
+  .hero-footer { position: absolute; bottom: 10%; left: 8.5%; right: 7%; display: flex; align-items: end; justify-content: space-between; z-index: 2; }
+  .hero-socials { display: flex; gap: 25px; }
+  .hero-socials a { display: grid; place-items: center; min-height: 32px; min-width: 24px; transition: transform 200ms, opacity 200ms; }
+  .hero-socials a:hover { transform: translateY(-3px); opacity: .6; }
+  .hero-location { position: relative; font-size: 12px; line-height: 1.15; padding-left: 37px; padding-bottom: 29px; }
+  .hero-location span { position: absolute; left: 0; top: 0; width: 23px; height: 23px; border-radius: 50%; background: linear-gradient(140deg, #515756, #222625); }
+  .hero-location span::after { content: ''; position: absolute; top: 23px; left: 11px; width: 1px; height: 23px; background: #adb2af; }
+  a:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; border-radius: 3px; }
+  :global(.dark) .portfolio-hero { background: #151717; color: #eee; }
+  :global(.dark) h1 em { color: #929998; }
+  :global(.dark) .hero-description, :global(.dark) .about-link, :global(.dark) .hero-eyebrow { color: #a4aaa8; }
+  :global(.dark) .work-arrow { background: #e4e7e5; color: #171919; }
+  @media (min-width: 1600px) { .hero-copy { padding-top: 170px; } }
+  @media (max-width: 1023px) and (min-width: 701px) {
+    .hero-canvas { min-height: 540px; height: calc(100svh - 92px); }
+    .hero-copy { margin-left: 8.5%; padding-top: clamp(85px, 14vh, 130px); width: 53%; }
+    h1 { font-size: clamp(37px, 4.8vw, 49px); }
+    .hero-description { font-size: 13px; max-width: 285px; margin-top: 26px; }
+    .hero-actions { gap: 30px; font-size: 12px; margin-top: 30px; }
+    .work-arrow { width: 48px; height: 48px; }
+    .hero-art { top: 10%; right: 6%; width: 31%; height: 70%; }
+  }
+  @media (max-width: 700px) {
+    .hero-canvas { min-height: auto; height: auto; max-height: none; padding: 55px 26px 28px; }
+    .hero-copy { width: 100%; margin: 0; padding: 0; }
+    .hero-eyebrow { font-size: 9px; margin-bottom: 18px; }
+    h1 { font-size: clamp(30px, 8.9vw, 60px); }
+    .hero-description { max-width: 340px; font-size: 15px; margin-top: 25px; }
+    .hero-actions { gap: 34px; margin-top: 28px; font-size: 12px; }
+    .work-link { gap: 15px; }
+    .work-arrow { width: 48px; height: 48px; }
+    .hero-art { position: relative; width: 94%; height: auto; aspect-ratio: 4 / 5; top: auto; right: auto; margin: 38px auto 0; }
+    .hero-footer { position: relative; inset: auto; margin-top: 24px; align-items: center; }
+    .hero-socials { gap: 19px; }
+    .hero-location { font-size: 10px; padding-left: 28px; padding-bottom: 14px; }
+    .hero-location span { width: 17px; height: 17px; }
+    .hero-location span::after { top: 17px; left: 8px; height: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a, .work-arrow { transition: none !important; transform: none !important; }
+    .portrait { animation: none; transform: none; }
+    .hero-photo { opacity: 1; }
+    .hero-logo, .portrait-toggle { display: none; }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
 import PostCard from '@/components/PostCard.astro';
 import { blogsPage } from '@/data';
 import { postUrl } from '@/utils/helper';
@@ -12,30 +13,32 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 ---
 
 <BaseLayout title="Blog Archive" description="Browse all blog posts by category or search through the complete archive of articles.">
-  <main class="container max-w-5xl mx-auto text-zinc-600 px-4 sm:px-6 lg:px-8">
-    <section class="py-12 sm:py-16">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black dark:text-slate-100">{blogsPage.title}</h1>
-      <p class="mt-4 max-w-2xl text-gray-700 dark:text-slate-300">{blogsPage.description}</p>
+  <div class="container max-w-5xl mx-auto text-neutral-600 dark:text-neutral-400 px-4 sm:px-6 lg:px-8">
+    <Hero />
+
+    <section class="pt-6 pb-6 sm:pt-8">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black dark:text-neutral-100">{blogsPage.title}</h2>
+      <p class="mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300">{blogsPage.description}</p>
     </section>
 
     <div class="px-0 max-md:mt-4">
       <label class="sr-only" for="search-posts">Search posts</label>
-      <input id="search-posts" placeholder="Search" class="w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-slate-900 px-4 py-3 text-gray-900 dark:text-slate-100" />
+      <input id="search-posts" placeholder="Search" class="w-full rounded border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 px-4 py-3 text-neutral-900 dark:text-neutral-100" />
     </div>
 
     <section class="mt-6">
       <div class="flex flex-wrap items-center gap-3 mb-4">
-        <h2 class="text-lg font-semibold text-zinc-800 dark:text-slate-100">Filter by Category:</h2>
-        <button id="clear-filters" type="button" class="rounded bg-gray-100 dark:bg-slate-800 px-3 py-1 text-sm hover:bg-gray-200 dark:hover:bg-slate-700">Clear All</button>
-        <a href="/tags" class="ml-auto text-sm font-medium text-gray-800 underline underline-offset-4 transition-colors hover:text-gray-950 dark:text-slate-200 dark:hover:text-white">Browse all tags</a>
+        <h2 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100">Filter by Category:</h2>
+        <button id="clear-filters" type="button" class="rounded bg-neutral-100 dark:bg-neutral-800 px-3 py-1 text-sm hover:bg-neutral-200 dark:hover:bg-neutral-700">Clear All</button>
+        <a href="/tags" class="ml-auto text-sm font-medium text-neutral-800 underline underline-offset-4 transition-colors hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">Browse all tags</a>
       </div>
 
       <div class="flex flex-wrap gap-2" id="category-buttons">
-        <button type="button" data-category="" class="category-button rounded px-3 py-1 text-sm bg-gray-900 text-white dark:bg-slate-100 dark:text-slate-900">
+        <button type="button" data-category="" class="category-button rounded px-3 py-1 text-sm bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900">
           All Posts ({posts.length})
         </button>
         {categories.map((category) => (
-          <button type="button" data-category={category.toLowerCase()} class="category-button rounded px-3 py-1 text-sm bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-800 dark:text-slate-100">
+          <button type="button" data-category={category.toLowerCase()} class="category-button rounded px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-100">
             {category} ({posts.filter((post) => post.data.tags.includes(category)).length})
           </button>
         ))}
@@ -63,14 +66,14 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
       ))}
     </section>
 
-    <p id="empty-state" class="hidden py-10 text-center text-gray-600 dark:text-slate-300">No posts found.</p>
+    <p id="empty-state" class="hidden py-10 text-center text-neutral-600 dark:text-neutral-300">No posts found.</p>
 
     <nav class="flex justify-center items-center mt-8 gap-2" aria-label="Pagination">
-      <button id="prev-page" class="rounded border border-gray-300 dark:border-gray-700 px-3 py-2 disabled:opacity-50">Prev</button>
-      <span id="page-status" class="text-sm text-gray-700 dark:text-slate-300"></span>
-      <button id="next-page" class="rounded border border-gray-300 dark:border-gray-700 px-3 py-2 disabled:opacity-50">Next</button>
+      <button id="prev-page" class="rounded border border-neutral-300 dark:border-neutral-700 px-3 py-2 disabled:opacity-50">Prev</button>
+      <span id="page-status" class="text-sm text-neutral-700 dark:text-neutral-300"></span>
+      <button id="next-page" class="rounded border border-neutral-300 dark:border-neutral-700 px-3 py-2 disabled:opacity-50">Next</button>
     </nav>
-  </main>
+  </div>
 
   <script>
     const postsPerPage = 5;
@@ -90,12 +93,12 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
     const setButtonState = () => {
       categoryButtons.forEach((button) => {
         const active = button.dataset.category === selectedCategory;
-        button.classList.toggle('bg-gray-900', active);
+        button.classList.toggle('bg-neutral-900', active);
         button.classList.toggle('text-white', active);
-        button.classList.toggle('dark:bg-slate-100', active);
-        button.classList.toggle('dark:text-slate-900', active);
-        button.classList.toggle('bg-gray-100', !active);
-        button.classList.toggle('dark:bg-slate-800', !active);
+        button.classList.toggle('dark:bg-neutral-100', active);
+        button.classList.toggle('dark:text-neutral-900', active);
+        button.classList.toggle('bg-neutral-100', !active);
+        button.classList.toggle('dark:bg-neutral-800', !active);
       });
     };
 

@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+import { seoData, socialLinks } from '@/data';
+const socials = [
+  { href: socialLinks.githubLink, label: 'GitHub' },
+  { href: socialLinks.linkedinLink, label: 'LinkedIn' },
+  { href: socialLinks.instagramLink, label: 'Instagram' },
+];
+---
+<section id="contact" class="folio-section contact-section scroll-mt-24" aria-labelledby="contact-title">
+  <svg class="contact-orbit" viewBox="0 0 1100 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M770 -110C432 134 497 544 822 479S1245 110 937 108S469 468 216 526" />
+    <circle cx="216" cy="526" r="3" />
+  </svg>
+  <div class="folio-inner">
+    <div class="contact-content" data-reveal>
+      <div>
+        <h2 id="contact-title" class="folio-heading">Have something<br />in <em>mind?</em></h2>
+        <p class="contact-description">A project, an interesting idea, or just a hello.<br />I'd love to hear from you.</p>
+        <a href={`mailto:${seoData.mailAddress}`} class="contact-cta">
+          <span class="contact-arrow" aria-hidden="true"><Icon name="heroicons:arrow-up-right" class="h-6 w-6" /></span>
+          <span>Let's talk <span class="contact-email">{seoData.mailAddress}</span></span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-bottom" data-reveal>
+      <div class="contact-socials">{socials.map((social) => <a href={social.href} target="_blank" rel="noreferrer">{social.label}<Icon name="heroicons:arrow-up-right" class="h-3 w-3" /></a>)}</div>
+      <a href="#home" class="back-top">Back to top <Icon name="heroicons:arrow-up" class="h-4 w-4" /></a>
+    </div>
+  </div>
+</section>
+<style>
+  .contact-section { overflow: hidden; isolation: isolate; }
+  .contact-section .folio-inner { position: relative; padding-bottom: 40px; }
+  .contact-orbit { position: absolute; width: 100%; height: 100%; inset: 0; pointer-events: none; color: var(--folio-line); z-index: -1; }
+  .contact-orbit path { stroke: currentColor; stroke-width: 1; fill: none; }
+  .contact-orbit circle { fill: var(--folio-muted); }
+  .contact-content { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .contact-content h2 { font-size: clamp(56px, 7vw, 96px); }
+  .contact-description { margin-top: 30px; line-height: 1.7; font-size: 16px; }
+  .contact-cta { display: inline-flex; gap: 23px; align-items: center; margin-top: 38px; font-size: 18px; }
+  .contact-arrow { display: grid; place-items: center; width: 62px; height: 62px; background: var(--folio-ink); color: var(--folio-paper); border-radius: 50%; transition: transform 220ms; }
+  .contact-cta:hover .contact-arrow { transform: rotate(45deg); }
+  .contact-email { display: block; font-size: 12px; color: var(--folio-muted); margin-top: 5px; }
+  .contact-bottom { margin-top: 95px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--folio-line); padding-top: 30px; font-size: 12px; }
+  .contact-socials { display: flex; flex-wrap: wrap; gap: 28px; }
+  .contact-socials a, .back-top { display: inline-flex; align-items: center; gap: 8px; padding-block: 5px; }
+  .contact-bottom a:hover { color: var(--folio-muted); }
+  @media (max-width: 700px) { .contact-content h2 { font-size: 58px; } .contact-description { font-size: 14px; } .contact-bottom { margin-top: 65px; flex-wrap: wrap; } .contact-socials { gap: 18px; } .contact-arrow { width: 52px; height: 52px; } .contact-cta { gap: 15px; } .contact-email { font-size: 11px; } }
+</style>

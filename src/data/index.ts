@@ -1,5 +1,5 @@
 export const navbarData = {
-  homeTitle: "Joshua's Blog",
+  homeTitle: "Joshua Palti Sinaga",
 };
 
 export const footerData = {
@@ -9,7 +9,7 @@ export const footerData = {
   authorInterest:
     "I have a fair amount of knowledge of Javascript, Typescript, VueJs, and Nuxt. If you have an interesting idea, either open source or paid let's connect.",
   aboutTheSite:
-    "This is a personal blog site built with Astro, TailwindCSS, and Astro Content Collections. Currently deployed in Vercel.",
+    "This portfolio and personal blog are built with Astro, Tailwind CSS, and Astro Content Collections.",
 };
 
 export const homePage = {
@@ -32,17 +32,17 @@ export const aboutPage = {
 };
 
 export const seoData = {
-  siteName: "Joshua's Blog",
+  siteName: "Joshua Palti Sinaga",
   author: "Joshua Palti Sinaga",
-  title: "Joshua's Blog | Joshua Palti Sinaga Blog",
+  title: "Joshua Palti Sinaga | Software Engineer & Writer",
   ogTitle:
-    "Welcome To Joshua's Blog Site. Read all about technology, web development, and more! | Joshua Palti Sinaga's Blog",
+    "Joshua Palti Sinaga — Software Engineer & Writer",
   description:
-    "Welcome To Joshua's Blog Site. Read all about technology, web development, and more! | Joshua Palti Sinaga's Blog",
+    "Portfolio and writing of Joshua Palti Sinaga, a software engineer building web, mobile, AI, and IoT products.",
   twitterDescription:
-    "Welcome To Joshua's Blog Site. Read all about technology, web development, and more! | Joshua Palti Sinaga's Blog",
-  image: "/profile.jpg",
-  mySite: "https://blog.itsjo.dev",
+    "Portfolio and writing about web development, software engineering, AI, and IoT.",
+  image: "/portfolio-og.webp",
+  mySite: "https://itsjo.dev",
   twitterHandle: "@qdnvubp",
   mailAddress: "josua123690707@gmail.com",
 };

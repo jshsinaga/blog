@@ -18,6 +18,7 @@ interface Props {
   modifiedTime?: string;
   tags?: string[];
   jsonLd?: JsonLd | JsonLd[];
+  flushFooter?: boolean;
 }
 
 const {
@@ -30,6 +31,7 @@ const {
   modifiedTime,
   tags = [],
   jsonLd = [],
+  flushFooter = false,
 } = Astro.props;
 
 const pageTitle = title === seoData.title ? title : `${title} | ${seoData.siteName}`;
@@ -70,7 +72,7 @@ const structuredData = [...baseStructuredData, ...(Array.isArray(jsonLd) ? jsonL
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <meta property="og:site_name" content={seoData.siteName} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content={ogType} />
@@ -92,13 +94,13 @@ const structuredData = [...baseStructuredData, ...(Array.isArray(jsonLd) ? jsonL
       <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
     ))}
   </head>
-  <body class="font-sans bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+  <body class:list={['font-sans min-h-screen flex flex-col', { 'portfolio-page': Astro.url.pathname === '/' }]}>
     <Header />
     <CodeBlockEnhancer />
     <ImageZoom />
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer flush={flushFooter} />
   </body>
 </html>

@@ -5,21 +5,51 @@
 @theme {
   --font-sans: "Figtree", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-neutral-50: #f9f9f8;
+  --color-neutral-100: #eeefec;
+  --color-neutral-200: #dedfdd;
+  --color-neutral-800: #353b38;
+  --color-neutral-900: #232927;
+  --color-neutral-950: #151717;
+}
+
+:root {
+  --folio-paper: #f9f9f8;
+  --folio-ink: #202222;
+  --folio-muted: #707675;
+  --folio-line: #dedfdd;
+  color-scheme: light;
+}
+
+:root.dark {
+  --folio-paper: #151717;
+  --folio-ink: #eef0ef;
+  --folio-muted: #a4aaa8;
+  --folio-line: #353b38;
+  color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  margin: 0;
-  background: white;
-  color: rgb(17 24 39);
+::selection {
+  background: rgb(0 0 0 / 0.16);
 }
 
-.dark body {
-  background: rgb(15 23 42);
-  color: rgb(241 245 249);
+.dark ::selection {
+  background: rgb(255 255 255 / 0.22);
+}
+
+body {
+  margin: 0;
+  background: var(--folio-paper);
+  color: var(--folio-ink);
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--folio-muted);
+  outline-offset: 5px;
 }
 
 .container {
@@ -49,4 +79,122 @@ body {
 
 .prose :where(a) {
   word-break: break-word;
+}
+
+/* Contact ambient — drifting light beams, soft pulsing glow, and film grain
+   over the dark closing section. */
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.contact-beam {
+  position: absolute;
+  top: -30%;
+  height: 160%;
+  width: 20rem;
+  transform: skewX(-12deg);
+  filter: blur(70px);
+  background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.1) 50%, transparent);
+  will-change: transform;
+}
+
+.contact-beam-1 { left: 6%; animation: beam-1 26s ease-in-out infinite alternate; }
+.contact-beam-2 { left: 44%; width: 28rem; animation: beam-2 36s ease-in-out infinite alternate; }
+.contact-beam-3 { left: 78%; animation: beam-3 31s ease-in-out infinite alternate; }
+
+@keyframes beam-1 {
+  to { transform: skewX(-12deg) translateX(16rem); }
+}
+
+@keyframes beam-2 {
+  to { transform: skewX(-12deg) translateX(-14rem); }
+}
+
+@keyframes beam-3 {
+  to { transform: skewX(-12deg) translateX(12rem); }
+}
+
+.contact-glow {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: 60rem;
+  height: 60rem;
+  background: radial-gradient(circle, rgb(255 255 255 / 0.07), transparent 60%);
+  filter: blur(40px);
+  animation: glow-pulse 14s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes glow-pulse {
+  from { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+}
+
+.contact-glow {
+  transform: translate(-50%, -50%);
+}
+
+.contact-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+
+.hero-enter {
+  animation: hero-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-1 { animation-delay: 80ms; }
+.hero-enter-2 { animation-delay: 160ms; }
+.hero-enter-3 { animation-delay: 260ms; }
+.hero-enter-4 { animation-delay: 360ms; }
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero-enter,
+  [data-reveal],
+  .contact-beam,
+  .contact-glow {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .portrait-frame,
+  .project-item img {
+    transform: none !important;
+    transition: none !important;
+  }
 }

@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 
 export default defineConfig({
-  site: "https://blog.itsjo.dev",
+  site: "https://itsjo.dev",
   integrations: [sitemap(), icon()],
   markdown: {
     shikiConfig: {

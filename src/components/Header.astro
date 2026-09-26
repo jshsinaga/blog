@@ -1,24 +1,30 @@
 ---
 import { Icon } from 'astro-icon/components';
 import SearchModal from '@/components/SearchModal.astro';
-import { navbarData } from '@/data';
 
 const pathname = Astro.url.pathname;
+const isHomepage = pathname === '/';
 const navItems = [
   { href: '/', label: 'Home', icon: 'heroicons:home' },
-  { href: '/blogs', label: 'Posts', icon: 'heroicons:document-text' },
-  { href: '/about', label: 'About', icon: 'heroicons:user' },
-  { href: 'https://itsjo.dev', label: 'Jo', icon: 'mdi:web-box', external: true },
+  { href: '/#about', label: 'About', icon: 'heroicons:user' },
+  { href: '/projects', label: 'Projects', icon: 'heroicons:squares-2x2' },
+  { href: '/blogs', label: 'Blog', icon: 'heroicons:document-text' },
+  { href: '/#contact', label: 'Contact', icon: 'heroicons:envelope' },
 ];
 
-const isActive = (href: string) => href === '/' ? pathname === '/' : href.startsWith('/') && pathname.startsWith(href);
+const isActive = (href: string) => {
+  if (href === '/') return isHomepage;
+  if (href === '/#about') return /^\/about\/?$/.test(pathname);
+  if (href.includes('#')) return false;
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
 ---
 
-<div class="py-3 sm:py-5 border-b bg-white dark:bg-slate-900 border-gray-300 dark:border-gray-800 font-semibold sticky top-0 z-50">
-  <div class="flex px-4 sm:px-6 container max-w-5xl justify-between mx-auto items-center">
+<header class="site-header portfolio-header sticky top-0 z-50">
+  <div class="header-inner flex px-4 sm:px-6 container max-w-5xl justify-between mx-auto items-center">
     <div class="flex-shrink-0">
-      <a href="/" class="text-lg sm:text-xl lg:text-2xl font-bold hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-        {navbarData.homeTitle}
+      <a href="/" aria-label="Joshua Palti Sinaga — Home" class="text-lg sm:text-xl lg:text-2xl font-bold hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">
+        Jo
       </a>
     </div>
 
@@ -28,12 +34,11 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : href.starts
           <li>
             <a
               href={item.href}
-              target={item.external ? '_blank' : undefined}
-              rel={item.external ? 'noreferrer' : undefined}
               class:list={[
-                'hover:text-gray-600 dark:hover:text-gray-300 transition-colors px-2 py-1',
-                isActive(item.href) && 'underline decoration-2 underline-offset-4',
+                'hover:text-neutral-500 dark:hover:text-neutral-400 transition-colors px-2 py-1',
+                isActive(item.href) && 'nav-active',
               ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
             >
               {item.label}
             </a>
@@ -41,14 +46,16 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : href.starts
         ))}
       </ul>
 
+      <a href={isHomepage ? '#contact' : '/#contact'} class="talk-link">Let's Talk <Icon name="heroicons:arrow-up-right" class="h-3 w-3" /></a>
+
       <div class="sm:hidden">
-        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded px-2 py-1 hover:bg-gray-100 dark:hover:bg-slate-800" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle mobile menu">
+        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle mobile menu">
           <Icon name="heroicons:bars-3" class="h-5 w-5" />
         </button>
       </div>
 
       <div class="flex-shrink-0">
-        <button id="search-open" type="button" class="inline-flex items-center justify-center rounded px-2 py-1 hover:bg-gray-100 dark:hover:bg-slate-800" aria-label="Search the blog" title="Search">
+        <button id="search-open" type="button" class="inline-flex items-center justify-center rounded px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Search the site" title="Search">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
@@ -56,7 +63,7 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : href.starts
       </div>
 
       <div class="flex-shrink-0">
-        <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded px-2 py-1 hover:bg-gray-100 dark:hover:bg-slate-800" aria-label="Toggle color theme" title="Toggle color theme">
+        <button id="theme-toggle" type="button" class="inline-flex items-center justify-center rounded px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Toggle color theme" title="Toggle color theme">
           <Icon name="material-symbols:light-mode" class="h-5 w-5 dark:hidden" />
           <Icon name="material-symbols:dark-mode" class="hidden h-5 w-5 dark:inline" />
         </button>
@@ -66,16 +73,14 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : href.starts
 
   <SearchModal />
 
-  <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-300 dark:border-gray-800 bg-white dark:bg-slate-900">
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950">
     <div class="px-4 py-3 space-y-1">
       {navItems.map((item) => (
         <a
           href={item.href}
-          target={item.external ? '_blank' : undefined}
-          rel={item.external ? 'noreferrer' : undefined}
           class:list={[
-            'block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white transition-colors',
-            isActive(item.href) && 'bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white',
+            'block px-3 py-2 rounded-md text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white transition-colors',
+            isActive(item.href) && 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white',
           ]}
         >
           <Icon name={item.icon} class="inline w-5 h-5 mr-2" />
@@ -84,7 +89,41 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : href.starts
       ))}
     </div>
   </div>
-</div>
+</header>
+
+<style>
+  .portfolio-header { background: var(--folio-paper); border-bottom: 0; padding-block: 25px; font-weight: 400; }
+  .portfolio-header .header-inner { max-width: 1440px; padding-inline: 8.5%; min-height: 42px; }
+  .portfolio-header nav { gap: 12px; }
+  .portfolio-header ul { position: absolute; left: 50%; transform: translateX(-50%); gap: 24px; font-size: 12px; }
+  .portfolio-header ul a { position: relative; padding-inline: 0; color: #707575; }
+  .portfolio-header ul a:hover, .portfolio-header ul .nav-active { color: #202222; }
+  .portfolio-header .nav-active::after { content: ''; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: currentColor; left: calc(50% - 2px); bottom: -6px; }
+  .talk-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 11px 23px; border: 1px solid #dedfdf; border-radius: 30px; font-size: 12px; white-space: nowrap; transition: background 200ms; }
+  .talk-link:hover { background: #eaeceb; }
+  .portfolio-header #search-open, .portfolio-header #theme-toggle { padding: 5px; color: #7a807e; }
+  .portfolio-header #search-open svg, .portfolio-header #theme-toggle svg { width: 15px; height: 15px; }
+  .portfolio-header a:focus-visible, .portfolio-header button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+  :global(.dark) .portfolio-header ul a { color: #a4aaa8; }
+  :global(.dark) .portfolio-header ul .nav-active { color: #f0f2f1; }
+  :global(.dark) .talk-link { border-color: #414745; }
+  :global(.dark) .talk-link:hover { background: #303634; }
+  @media (min-width: 701px) and (max-width: 1023px) {
+    .portfolio-header .header-inner { padding-inline: 6%; }
+    .portfolio-header ul { gap: 18px; left: 44%; }
+    .portfolio-header nav { gap: 5px; }
+    .talk-link { padding-inline: 16px; }
+  }
+  @media (max-width: 700px) {
+    .portfolio-header { padding-block: 16px; }
+    .portfolio-header .header-inner { padding-inline: 26px; }
+    .portfolio-header ul { display: none; }
+    .portfolio-header nav > .sm\:hidden { display: block; }
+    .portfolio-header #mobile-menu:not(.hidden) { display: block; }
+    .talk-link { padding: 9px 14px; font-size: 11px; }
+    .portfolio-header nav { gap: 6px; }
+  }
+</style>
 
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -94,6 +133,18 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : href.starts
   mobileMenuButton?.addEventListener('click', () => {
     const isHidden = mobileMenu?.classList.toggle('hidden');
     mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
+  });
+
+  const closeMobileMenu = () => {
+    mobileMenu?.classList.add('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'false');
+  };
+  mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      closeMobileMenu();
+      mobileMenuButton?.focus();
+    }
   });
 
   themeToggle?.addEventListener('click', () => {

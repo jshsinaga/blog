@@ -11,17 +11,17 @@ const { headings = [] } = Astro.props as { headings: Heading[] };
 const toc = headings.filter((heading) => heading.depth > 1 && heading.depth < 4);
 ---
 
-<aside id="toc-sidebar" class="toc-sidebar fixed right-0 w-64 h-full bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto">
+<aside id="toc-sidebar" class="toc-sidebar fixed top-0 right-0 w-64 h-dvh bg-neutral-50 dark:bg-neutral-950 border-l border-neutral-200 dark:border-neutral-800 translate-x-full transition-transform duration-300 ease-in-out z-[60] overflow-y-auto">
   <div class="h-full rounded-none border-0 p-4">
-    <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
+    <div class="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-700 pb-3 mb-4">
       <h3 class="font-semibold">Table of Contents</h3>
-      <button id="toc-close" type="button" class="rounded px-2 py-1 hover:bg-gray-100 dark:hover:bg-slate-800" aria-label="Close TOC">
+      <button id="toc-close" type="button" class="rounded px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Close TOC">
         <Icon name="heroicons:x-mark" class="h-5 w-5" />
       </button>
     </div>
 
     {toc.length === 0 ? (
-      <p class="text-sm text-gray-500 dark:text-gray-400">No headings found in this article.</p>
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">No headings found in this article.</p>
     ) : (
       <nav class="space-y-2" aria-label="Table of contents">
         {toc.map((heading) => (

@@ -17,7 +17,7 @@ const optimizedImage = postImage(image);
 ---
 
 <header>
-  <h1 class="text-xl sm:text-2xl dark:text-slate-100 md:text-3xl lg:text-4xl m-3 md:m-7 font-bold text-center">
+  <h1 class="text-xl sm:text-2xl dark:text-neutral-100 md:text-3xl lg:text-4xl m-3 md:m-7 font-bold text-center">
     {title}
   </h1>
   <div class="w-11/12 md:w-4/5 m-auto mt-6">
@@ -51,18 +51,18 @@ const optimizedImage = postImage(image);
       <div class="flex place-content-start gap-2 flex-wrap w-1/2 md:w-5/12">
         {tags.map((tag) => (
           <a href={`/tags/${tagSlug(tag)}`}>
-            <span class="text-[0.6rem] sm:text-xs bg-gray-200 dark:bg-slate-800 rounded px-2 py-1 font-semibold hover:bg-gray-300 dark:hover:bg-slate-700 transition-colors duration-200">
+            <span class="text-[0.6rem] sm:text-xs bg-neutral-200 dark:bg-neutral-800 rounded px-2 py-1 font-semibold hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200">
               {tag}
             </span>
           </a>
         ))}
       </div>
-      <time class="text-zinc-600 dark:text-slate-100 text-sm" datetime={new Date(date).toISOString()}>{formatDate(date)}</time>
+      <time class="text-neutral-600 dark:text-neutral-100 text-sm" datetime={new Date(date).toISOString()}>{formatDate(date)}</time>
     </div>
   </div>
 
   <div class="flex flex-col py-8">
-    <p class="italic text-sm sm:text-base max-w-xl mx-auto text-center text-zinc-800 dark:text-slate-300">
+    <p class="italic text-sm sm:text-base max-w-xl mx-auto text-center text-neutral-800 dark:text-neutral-300">
       {description}
     </p>
   </div>

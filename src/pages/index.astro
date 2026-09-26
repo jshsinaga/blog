@@ -1,45 +1,112 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Hero from '@/components/Hero.astro';
-import PostCard from '@/components/PostCard.astro';
-import { postUrl } from '@/utils/helper';
+import PortfolioHero from '@/components/PortfolioHero.astro';
+import PortfolioAbout from '@/components/PortfolioAbout.astro';
+import ProjectGallery from '@/components/ProjectGallery.astro';
+import PortfolioContact from '@/components/PortfolioContact.astro';
+import { projects } from '@/data/projects';
+import { formatDate, postUrl } from '@/utils/helper';
+import { postImage } from '@/utils/postImages';
+import '@/styles/portfolio.css';
 
-const posts = (await getCollection('blogs', ({ data }) => data.published))
+const featuredProjects = projects.slice(0, 6);
+const recentPosts = (await getCollection('blogs', ({ data }) => data.published))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 10);
+  .slice(0, 3);
 ---
 
-<BaseLayout title="Home" description="Welcome To Joshua's Blog Site. Read all about technology, web development, and more!">
-  <main class="container max-w-5xl mx-auto text-zinc-600 px-4 sm:px-6 lg:px-8">
-    <Hero />
+<BaseLayout
+  title="Software Engineer & Product Builder"
+  description="Portfolio and writing of Joshua Palti Sinaga, a software engineer building web, mobile, AI, and IoT products."
+  image="/portfolio-og.webp"
+  flushFooter
+>
+  <PortfolioHero />
+  <PortfolioAbout />
 
-    <section>
-      <div class="flex flex-row items-center space-x-3 pt-6 sm:pt-8 pb-4 sm:pb-6">
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black dark:text-slate-100">Posts</h2>
-      </div>
-      <div class="grid grid-cols-1 gap-4 sm:gap-6">
-        {posts.map((post) => (
-          <PostCard
-            href={postUrl(post.id)}
-            title={post.data.title}
-            date={post.data.date}
-            description={post.data.description}
-            image={post.data.image}
-            alt={post.data.alt}
-            tags={post.data.tags}
-          />
-        ))}
+  <section id="projects" class="folio-section scroll-mt-24" aria-labelledby="projects-title">
+    <div class="folio-inner">
+      <div class="folio-section-heading" data-reveal>
+        <div>
+          <h2 id="projects-title" class="folio-heading">Ideas made <em>real.</em></h2>
+        </div>
+        <div class="max-w-sm lg:justify-self-end">
+          <p class="leading-relaxed text-neutral-600 dark:text-neutral-400">A collection of things I've built, from web apps to mobile apps and random experiments.</p>
+          <a href="/projects" class="group mt-6 inline-flex items-center gap-3 text-sm font-semibold text-neutral-950 dark:text-white">
+            <span class="underline decoration-neutral-300 decoration-1 underline-offset-8 transition-colors group-hover:decoration-neutral-950 dark:decoration-neutral-700 dark:group-hover:decoration-white">View all {projects.length} projects</span>
+            <Icon name="heroicons:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+        </div>
       </div>
 
-      <div class="mt-10 text-center">
-        <a
-          href="/blogs"
-          class="inline-flex items-center gap-2 rounded border border-gray-300 dark:border-gray-700 px-5 py-2.5 text-sm font-semibold text-gray-800 dark:text-slate-100 transition-colors hover:bg-gray-100 dark:hover:bg-slate-800"
-        >
-          View all posts
-        </a>
+      <ProjectGallery projects={featuredProjects} editorial />
+    </div>
+  </section>
+
+  <section id="writing" class="folio-section folio-writing" aria-labelledby="writing-title">
+    <div class="folio-inner">
+      <div class="grid gap-16 lg:grid-cols-[0.45fr_1fr] lg:gap-20">
+        <div data-reveal>
+          <h2 id="writing-title" class="folio-heading">Always<br /><em>learning.</em></h2>
+          <p class="mt-6 max-w-sm leading-relaxed text-neutral-600 dark:text-neutral-400">Thoughts, tutorials, and things I'm learning along the way.</p>
+          <a href="/blogs" class="group mt-8 inline-flex items-center gap-3 text-sm font-semibold text-neutral-950 dark:text-white">
+            <span class="underline decoration-neutral-300 decoration-1 underline-offset-8 transition-colors group-hover:decoration-neutral-950 dark:decoration-neutral-700 dark:group-hover:decoration-white">View all posts</span>
+            <Icon name="heroicons:arrow-up-right" class="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        </div>
+
+        <div class="border-t border-neutral-200 dark:border-neutral-800" data-reveal>
+          {recentPosts.map((post, index) => {
+            const cover = postImage(post.data.image);
+            return (
+              <article class="journal-entry group border-b border-neutral-200 dark:border-neutral-800">
+                <a href={postUrl(post.id)} class="grid gap-5 py-8 sm:grid-cols-[auto_auto_1fr_auto] sm:items-center sm:gap-7">
+                  <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">{String(index + 1).padStart(2, '0')}</span>
+                  {cover && (
+                    <Image
+                      src={cover}
+                      alt={post.data.alt || post.data.title}
+                      width={224}
+                      class="w-full aspect-[16/10] object-cover sm:w-28"
+                    />
+                  )}
+                  <div>
+                    <h3 class="text-xl font-semibold tracking-tight text-neutral-950 transition-colors group-hover:text-neutral-500 dark:text-white dark:group-hover:text-neutral-400 sm:text-2xl">
+                      {post.data.title}
+                    </h3>
+                    <p class="mt-3 line-clamp-2 leading-relaxed text-neutral-600 dark:text-neutral-400">{post.data.description}</p>
+                  </div>
+                  <time datetime={post.data.date.toISOString()} class="font-mono text-xs text-neutral-500 dark:text-neutral-400">{formatDate(post.data.date)}</time>
+                </a>
+              </article>
+            );
+          })}
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <PortfolioContact />
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+    if (reduceMotion) {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          currentObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.14 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    }
+  </script>
 </BaseLayout>

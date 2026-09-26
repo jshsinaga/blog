@@ -1,33 +1,57 @@
 ---
 import { Icon } from 'astro-icon/components';
 
+interface Props {
+  flush?: boolean;
+}
+
+const { flush = false } = Astro.props;
 const year = new Date().getFullYear();
+const isHomepage = Astro.url.pathname === '/';
 ---
 
-<footer class="text-zinc-700 dark:text-slate-100 mt-32">
+{isHomepage ? (
+  <footer class="portfolio-footer">
+    <a href="#home" class="footer-logo" aria-label="Joshua Palti Sinaga — back to top">Jo</a>
+    <p>Joshua Palti Sinaga <span>© {year}</span></p>
+    <p class="footer-note">Built with care, in Indonesia.</p>
+    <a href="/rss.xml" class="footer-rss">RSS <Icon name="mdi:rss" class="h-3 w-3" /></a>
+  </footer>
+) : (
+<footer class:list={['text-neutral-600 dark:text-neutral-300', !flush && 'mt-32']}>
   <div class="px-6 container max-w-5xl mx-auto">
-    <div class="border-t border-gray-300 dark:border-gray-800 mt-5 text-center text-sm py-6">
+    <div class="border-t border-neutral-200 dark:border-neutral-800 mt-5 text-center text-sm py-6">
       <h4 class="font-semibold text-base">Joshua Palti Sinaga</h4>
-      <h5>Writing bugs in both frontend and backend since 2019</h5>
+      <h5>Building products and documenting the lessons since 2019</h5>
       © 2020-{year} | Powered by
       <a href="https://astro.build" target="_blank" rel="nofollow" class="underline">Astro</a>
       <div class="flex place-content-center">
-        <a class="p-1 rounded hover:bg-gray-100 dark:hover:bg-slate-800" href="https://github.com/jo0707" target="_blank" aria-label="GitHub" rel="noreferrer">
+        <a class="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800" href="https://github.com/jo0707" target="_blank" aria-label="GitHub" rel="noreferrer">
           <Icon name="mdi:github-box" class="h-6 w-6" />
         </a>
-        <a class="p-1 rounded hover:bg-gray-100 dark:hover:bg-slate-800" href="https://linkedin.com/in/joshuapaltisinaga" target="_blank" aria-label="LinkedIn" rel="noreferrer">
+        <a class="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800" href="https://linkedin.com/in/joshuapaltisinaga" target="_blank" aria-label="LinkedIn" rel="noreferrer">
           <Icon name="mdi:linkedin" class="h-6 w-6" />
         </a>
-        <a class="p-1 rounded hover:bg-gray-100 dark:hover:bg-slate-800" href="https://instagram.com/code.withjoo" target="_blank" aria-label="Instagram" rel="noreferrer">
+        <a class="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800" href="https://instagram.com/code.withjoo" target="_blank" aria-label="Instagram" rel="noreferrer">
           <Icon name="mdi:instagram" class="h-6 w-6" />
         </a>
-        <a class="p-1 rounded hover:bg-gray-100 dark:hover:bg-slate-800" href="https://itsjo.dev" target="_blank" aria-label="My Site" rel="noreferrer">
+        <a class="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800" href="/" aria-label="Portfolio">
           <Icon name="mdi:web-box" class="h-6 w-6" />
         </a>
-        <a class="p-1 rounded hover:bg-gray-100 dark:hover:bg-slate-800" href="/rss.xml" target="_blank" aria-label="RSS Feed">
+        <a class="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800" href="/rss.xml" target="_blank" aria-label="RSS Feed">
           <Icon name="mdi:rss-box" class="h-6 w-6" />
         </a>
       </div>
     </div>
   </div>
 </footer>
+)}
+
+<style>
+  .portfolio-footer { padding: 35px 26px 45px; text-align: center; font-size: 12px; color: var(--folio-muted); background: var(--folio-paper); }
+  .footer-logo { display: inline-block; font-size: 25px; font-weight: 600; color: var(--folio-ink); margin-bottom: 12px; }
+  .portfolio-footer p span { margin-left: 10px; }
+  .footer-note { margin-top: 7px; font-size: 11px; }
+  .footer-rss { display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; font-size: 10px; }
+  .footer-rss:hover { color: var(--folio-ink); }
+</style>

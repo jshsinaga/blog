@@ -9,26 +9,26 @@
   class="fixed inset-0 z-[60] hidden"
   role="dialog"
   aria-modal="true"
-  aria-label="Search the blog"
+  aria-label="Search the site"
 >
   <div id="search-overlay" class="absolute inset-0 bg-black/40"></div>
   <div class="relative mx-auto mt-20 sm:mt-28 w-[calc(100%-2rem)] max-w-xl">
-    <div class="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow-2xl">
-      <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 shrink-0 text-gray-500 dark:text-slate-400">
+    <div class="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 shadow-2xl">
+      <div class="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-700 px-4 py-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 shrink-0 text-neutral-500 dark:text-neutral-400">
           <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
         </svg>
         <input
           id="search-input"
           type="search"
-          aria-label="Search posts"
-          placeholder="Search posts..."
+          aria-label="Search the site"
+          placeholder="Search projects and posts..."
           autocomplete="off"
           autocapitalize="off"
           spellcheck="false"
-          class="w-full bg-transparent text-sm text-gray-900 dark:text-slate-100 outline-none placeholder:text-gray-400 dark:placeholder:text-slate-500"
+          class="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
         />
-        <kbd class="hidden sm:inline rounded border border-gray-300 dark:border-gray-600 px-1.5 py-0.5 text-xs text-gray-400">Esc</kbd>
+        <kbd class="hidden sm:inline rounded border border-neutral-300 dark:border-neutral-600 px-1.5 py-0.5 text-xs text-neutral-400">Esc</kbd>
       </div>
       <div id="search-results" class="max-h-96 overflow-y-auto p-2"></div>
     </div>
@@ -95,7 +95,7 @@
       };
 
       const showHint = (message) => {
-        results.innerHTML = `<p class="px-3 py-6 text-center text-sm text-gray-500 dark:text-slate-400">${message}</p>`;
+        results.innerHTML = `<p class="px-3 py-6 text-center text-sm text-neutral-500 dark:text-neutral-400">${message}</p>`;
       };
 
       const open = async () => {
@@ -158,9 +158,9 @@
                     .replace(/<mark>/g, '<mark class="rounded bg-yellow-200/80 px-0.5 dark:bg-yellow-600/40">')
                     .replace(/<\/mark>/g, '</mark>')
                 : '';
-              return `<a href="${item.url}" class="block rounded-md px-3 py-2.5 hover:bg-gray-100 dark:hover:bg-slate-800">
-                <span class="block text-sm font-semibold text-gray-900 dark:text-slate-100">${title}</span>
-                ${excerpt ? `<span class="mt-0.5 block text-xs leading-relaxed text-gray-600 line-clamp-2 dark:text-slate-400">${excerpt}</span>` : ''}
+              return `<a href="${item.url}" class="block rounded-md px-3 py-2.5 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                <span class="block text-sm font-semibold text-neutral-900 dark:text-neutral-100">${title}</span>
+                ${excerpt ? `<span class="mt-0.5 block text-xs leading-relaxed text-neutral-600 line-clamp-2 dark:text-neutral-400">${excerpt}</span>` : ''}
               </a>`;
             })
             .join('');

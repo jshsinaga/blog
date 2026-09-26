@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components';
+const stats = [
+  { value: '2+', label: 'Years of experience' },
+  { value: '10+', label: 'Projects completed' },
+  { value: '1', label: 'Competition won' },
+];
+const toolkit = ['TypeScript', 'Go', 'Python', 'Nuxt', 'Next.js', 'Astro', 'MongoDB', 'PostgreSQL', 'Flutter', 'Capacitor', 'Firebase'];
+---
+<section id="about" class="folio-section scroll-mt-24" aria-labelledby="about-title">
+  <div class="folio-inner">
+
+    <div class="about-grid">
+      <div data-reveal>
+        <h2 id="about-title" class="folio-heading">A curious mind.<br />A love for<br /><em>building things.</em></h2>
+      </div>
+      <div class="about-story" data-reveal>
+        <p class="about-intro">I'm Joshua, an Informatics Engineering student at Institut Teknologi Sumatera and a full-stack developer based in Indonesia.</p>
+        <p>I build web and mobile applications with a focus on the people using them. I enjoy working through a difficult problem and turning it into something simple and useful.</p>
+        <p>I started programming at sixteen and won first place at LKS North Sumatera, a provincial vocational skills competition. These days, that same curiosity takes me from web and mobile development into AI and IoT.</p>
+        <a href="/about" class="inline-flex items-center gap-3 text-sm underline decoration-neutral-300 underline-offset-8 dark:decoration-neutral-700">More about me <Icon name="heroicons:arrow-up-right" class="h-4 w-4" /></a>
+      </div>
+    </div>
+    <div class="about-details" data-reveal>
+      <dl class="about-stats">
+        {stats.map((stat) => <div><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}
+      </dl>
+      <div class="about-toolkit">
+        <h3>Tools I work with</h3>
+        <ul>{toolkit.map((tool) => <li>{tool}</li>)}</ul>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; }
+  .about-story { display: grid; gap: 23px; font-size: 15px; line-height: 1.8; }
+  .about-story .about-intro { font-size: 20px; line-height: 1.6; color: var(--folio-ink) !important; letter-spacing: -.02em; }
+  .about-story a { width: fit-content; margin-top: 9px; }
+  .about-details { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; border-top: 1px solid var(--folio-line); padding-top: 40px; margin-top: 70px; }
+  .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+  .about-stats > div { display: flex; flex-direction: column-reverse; justify-content: end; gap: 12px; }
+  dt { font-size: 11px; color: var(--folio-muted); }
+  dd { font-size: 43px; font-weight: 300; letter-spacing: -.06em; }
+  .about-toolkit h3 { font-size: 11px; color: var(--folio-muted); margin-bottom: 16px; }
+  .about-toolkit ul { display: flex; flex-wrap: wrap; gap: 9px 18px; max-width: 390px; font-size: 13px; }
+  @media (max-width: 1023px) { .about-grid, .about-details { gap: 40px; } }
+  @media (max-width: 700px) { .about-grid, .about-details { grid-template-columns: 1fr; gap: 35px; } .about-details { margin-top: 40px; } .about-story .about-intro { font-size: 18px; } dd { font-size: 38px; } }
+</style>
