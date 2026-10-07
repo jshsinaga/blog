@@ -1,12 +1,18 @@
-# BLOG_CREATE.md
+# Blog Writing Spec
 
 Guide for creating blog posts on this site, written in the site owner's voice.
 
-Read this file at the start of any "create a blog post" session, before writing anything. Follow the workflow step by step and confirm with the user before moving to the next step.
+Read this file at the start of any blog-writing session. Follow the workflow step by step and confirm with the user before moving to the next step.
 
 ## When to use this file
 
-Use this file when the task is to create a new blog post or (partly) edit an existing one. For anything else, like site development, use `AGENTS.md`.
+Use this file when creating a new blog post or editing an existing one. For site development, read `AGENTS.md` and the relevant project spec.
+
+## Draft-first workflow
+
+- Unfinished posts live in `draft/`, one Markdown file per draft.
+- At the start of a blog-writing session, check `draft/` and offer existing drafts to continue, edit, or publish before starting a new post.
+- To publish an existing draft, move it from `draft/` to `src/content/blogs` and apply the file-naming, frontmatter, image, tone, quality-checklist, and validation rules below.
 
 ## Workflow (interactive, confirm per step)
 
@@ -140,7 +146,7 @@ Before saying a post is done:
 - Title is clear.
 - Date is valid.
 - Description fits SEO and preview cards.
-- Images exist in `public`.
+- Featured images exist in `src/assets/blogs`; post-body images exist in `public`.
 - Alt text describes the image.
 - Headings follow a logical order.
 - Code blocks have language tags when possible.

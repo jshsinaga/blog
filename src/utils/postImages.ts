@@ -19,7 +19,7 @@ for (const [path, mod] of Object.entries(imageModules)) {
  * Returns the optimized ImageMetadata for a frontmatter image path, or undefined.
  *
  * Frontmatter `image` paths must mirror the `src/assets/blogs` folder (see
- * BLOG_CREATE.md). When a path does not resolve, we warn loudly instead of
+ * `docs/BLOG_WRITING_SPEC.md`). When a path does not resolve, we warn loudly instead of
  * silently shipping an unoptimized (or broken) fallback image.
  */
 export function postImage(src: string): ImageMetadata | undefined {
