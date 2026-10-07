@@ -5,6 +5,7 @@ import CodeBlockEnhancer from '@/components/CodeBlockEnhancer.astro';
 import ImageZoom from '@/components/ImageZoom.astro';
 import { seoData, socialLinks } from '@/data';
 import '@/styles/global.css';
+import 'lenis/dist/lenis.css';
 
 type JsonLd = Record<string, unknown>;
 
@@ -18,7 +19,6 @@ interface Props {
   modifiedTime?: string;
   tags?: string[];
   jsonLd?: JsonLd | JsonLd[];
-  flushFooter?: boolean;
 }
 
 const {
@@ -31,7 +31,6 @@ const {
   modifiedTime,
   tags = [],
   jsonLd = [],
-  flushFooter = false,
 } = Astro.props;
 
 const pageTitle = title === seoData.title ? title : `${title} | ${seoData.siteName}`;
@@ -98,9 +97,19 @@ const structuredData = [...baseStructuredData, ...(Array.isArray(jsonLd) ? jsonL
     <Header />
     <CodeBlockEnhancer />
     <ImageZoom />
+
+    <script>
+      import Lenis from 'lenis';
+
+      new Lenis({
+        autoRaf: true,
+        anchors: true,
+        respectReducedMotion: true,
+      });
+    </script>
     <main class="flex-1">
       <slot />
     </main>
-    <Footer flush={flushFooter} />
+    <Footer />
   </body>
 </html>

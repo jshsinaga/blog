@@ -21,6 +21,7 @@ bun run preview
 - RSS feed
 - Sitemap and robots.txt
 - Dark/light mode
+- Smooth scrolling with Lenis, respecting reduced-motion preferences
 - Responsive Tailwind design
 
 ## Notes
