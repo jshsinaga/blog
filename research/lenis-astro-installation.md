@@ -1,8 +1,0 @@
-# Lenis installation for Astro
-
-**Checked:** 2026-10-07
-
-- The official npm package is **`lenis`**, latest **1.3.26** on this date. Install with `npm install lenis` (also documented: `yarn add lenis`, `pnpm add lenis`), then import `Lenis` from `lenis`. [npm package](https://www.npmjs.com/package/lenis) · [Lenis installation docs](https://github.com/darkroomengineering/lenis/blob/main/README.md#installation)
-- Lenis's basic setup is `new Lenis({ autoRaf: true })`. Alternatively, omit `autoRaf` and call `lenis.raf(time)` on each `requestAnimationFrame`; the README recommends importing `lenis/dist/lenis.css`. [Lenis setup and CSS](https://github.com/darkroomengineering/lenis/blob/main/README.md#setup)
-- **Astro integration (applying Astro's documented client-script pattern):** initialize Lenis in a processed `<script>` in an `.astro` component and import the npm package there. Astro processes ordinary component scripts as browser modules and bundles npm imports; scripts with extra attributes are not processed, so avoid `is:inline` if relying on npm import bundling. [Astro client-side scripts](https://docs.astro.build/en/guides/client-side-scripts/)
-- `respectReducedMotion` defaults to `true`: Lenis honors `prefers-reduced-motion`, disables smoothing and makes programmatic scrolls immediate; the preference updates live. Keep this default (the README says opting out is not recommended). `lenis.destroy()` removes the instance's events. [Lenis reduced motion and methods](https://github.com/darkroomengineering/lenis/blob/main/README.md#reduced-motion) · [Lenis methods](https://github.com/darkroomengineering/lenis/blob/main/README.md#methods)
