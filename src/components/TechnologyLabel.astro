@@ -56,7 +56,7 @@ const icon = icons[name];
 if (!icon) throw new Error(`Missing technology icon for "${name}"`);
 ---
 
-<span class="technology-label">
+<span class="technology-label rounded bg-neutral-100 px-2 py-1 transition-colors duration-200 hover:bg-neutral-200 motion-reduce:transition-none dark:bg-neutral-800 dark:hover:bg-neutral-700">
   <Icon name={icon} aria-hidden="true" class="technology-icon" />
   <span>{name}</span>
 </span>

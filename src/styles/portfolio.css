@@ -8,11 +8,10 @@
 .portfolio-page .folio-section a { font-weight: 400; }
 .portfolio-page a:focus-visible, .portfolio-page button:focus-visible { outline: 2px solid var(--folio-muted); outline-offset: 5px; }
 .editorial-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; row-gap: 48px; align-items: start; }
-.editorial-gallery .project-item > a { background: #eeefec; border-radius: 6px; }
+.editorial-gallery .project-item > a { background: #eeefec; }
 .dark .editorial-gallery .project-item > a { background: #232927; }
 .editorial-gallery .project-item > a > div { aspect-ratio: 16 / 9; overflow: hidden; }
 .editorial-gallery .project-item img { width: 100%; height: 100%; object-fit: cover; }
-.editorial-gallery .project-item > div { border-top: 0; margin-top: 20px; padding-top: 0; }
 .editorial-gallery h3 { font-size: 20px; font-weight: 400; letter-spacing: -.035em; }
 .editorial-gallery .project-item p { font-size: 14px; }
 .editorial-gallery .project-item p.font-mono { font-family: inherit; font-size: 11px; }

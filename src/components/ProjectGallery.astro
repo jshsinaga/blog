@@ -25,7 +25,7 @@ const imagePath = (image: string) => `/img/projects/${image.includes('.') ? imag
           </div>
         </a>
 
-        <div class="mt-6 border-t border-neutral-300 pt-5 dark:border-neutral-700">
+        <div class="project-content">
           <div class="flex items-baseline justify-between gap-4">
             <div class="flex items-baseline gap-4">
               <Heading class="text-lg font-semibold tracking-tight text-neutral-950 dark:text-white sm:text-xl">{project.name}</Heading>
@@ -73,10 +73,11 @@ const imagePath = (image: string) => `/img/projects/${image.includes('.') ? imag
 </script>
 
 <style>
-  .project-item { min-width: 0; }
+  .project-item { min-width: 0; border: 1px solid var(--folio-line); border-radius: 6px; }
+  .project-content { padding: 20px; }
   .project-technologies { display: flex; flex-wrap: wrap; gap: 6px 12px; }
   .project-item h2, .project-item h3 { font-weight: 400; letter-spacing: -.025em; }
-  .project-item > a { border-radius: 6px; }
+  .project-item > a { border-radius: 5px 5px 0 0; }
   .project-item > div a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--folio-muted); }
   .project-item > div a:hover { color: var(--folio-ink); }
 </style>
