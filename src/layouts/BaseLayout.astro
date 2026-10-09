@@ -61,8 +61,7 @@ const structuredData = [...baseStructuredData, ...(Array.isArray(jsonLd) ? jsonL
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
       const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.classList.toggle('dark', savedTheme ? savedTheme === 'dark' : prefersDark);
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
     </script>
     <title>{pageTitle}</title>
     <meta name="description" content={description} />

@@ -21,9 +21,9 @@
 
 Page and navbar backgrounds must agree across routes. Cards, search, tag/filter controls, and the article table of contents use the same neutral palette; raised surfaces may use its secondary tones.
 
-The shared navbar always contains **Jo**, Home, About, Projects, Blog, Contact, Let's Talk, search, and the theme toggle. Do not vary its appearance by route. Mark the current route appropriately; Blog remains active on individual article routes. Homepage section links must work from other pages (`/#about`, `/#contact`).
+The shared navbar always contains **Jo**, Home, About, Projects, Blog, Contact, Let's Talk, search, and the theme toggle. Do not vary its appearance by route. Keep the navbar free of a bottom border. Mark the current route appropriately; Blog remains active on individual article routes. Homepage section links must work from other pages (`/#about`, `/#contact`).
 
-Preserve the mobile menu and Escape-to-close behavior, search button ID `search-open`, and theme button ID `theme-toggle`. Theme selection uses the `dark` class on `<html>`, the saved `localStorage` preference, and the system preference when no selection is saved.
+Preserve the mobile menu and Escape-to-close behavior, search button ID `search-open`, and theme button ID `theme-toggle`. Theme selection uses the `dark` class on `<html>` and the saved `localStorage` preference. Default to the white/light theme when no selection is saved; never consult the system color scheme.
 
 ## Portfolio homepage
 
