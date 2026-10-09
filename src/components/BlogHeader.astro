@@ -16,11 +16,11 @@ const { title, image, alt, description, date, tags } = Astro.props;
 const optimizedImage = postImage(image);
 ---
 
-<header>
-  <h1 class="text-xl sm:text-2xl dark:text-neutral-100 md:text-3xl lg:text-4xl m-3 md:m-7 font-bold text-center">
+<header class="article-header">
+  <h1 class="article-title">
     {title}
   </h1>
-  <div class="w-11/12 md:w-4/5 m-auto mt-6">
+  <div class="mt-8">
     {optimizedImage ? (
       <Image
         src={optimizedImage}
@@ -33,7 +33,7 @@ const optimizedImage = postImage(image);
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="w-full rounded shadow-md h-48 md:h-72 object-cover zoomable border border-black/15 dark:border-white/20"
+        class="w-full rounded-md h-48 md:h-72 object-cover zoomable border border-black/15 dark:border-white/20"
       />
     ) : (
       <img
@@ -44,14 +44,14 @@ const optimizedImage = postImage(image);
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="w-full rounded shadow-md h-48 md:h-72 object-cover zoomable border border-black/15 dark:border-white/20"
+        class="w-full rounded-md h-48 md:h-72 object-cover zoomable border border-black/15 dark:border-white/20"
       />
     )}
-    <div class="flex gap-2 place-content-between mt-2">
-      <div class="flex place-content-start gap-2 flex-wrap w-1/2 md:w-5/12">
+    <div class="flex flex-wrap gap-4 justify-between items-start mt-5">
+      <div class="flex gap-2 flex-wrap max-w-full">
         {tags.map((tag) => (
           <a href={`/tags/${tagSlug(tag)}`}>
-            <span class="text-[0.6rem] sm:text-xs bg-neutral-200 dark:bg-neutral-800 rounded px-2 py-1 font-semibold hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200">
+            <span class="inline-block text-xs bg-neutral-200 dark:bg-neutral-800 rounded px-2 py-1 font-semibold hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200">
               {tag}
             </span>
           </a>
@@ -62,8 +62,13 @@ const optimizedImage = postImage(image);
   </div>
 
   <div class="flex flex-col py-8">
-    <p class="italic text-sm sm:text-base max-w-xl mx-auto text-center text-neutral-800 dark:text-neutral-300">
+    <p class="text-base sm:text-lg leading-relaxed text-neutral-600 dark:text-neutral-300">
       {description}
     </p>
   </div>
 </header>
+
+<style>
+  .article-header { border-bottom: 1px solid var(--folio-line); margin-bottom: 40px; }
+  .article-title { font-size: clamp(32px, 4vw, 52px); line-height: 1.14; font-weight: 400; letter-spacing: -.035em; color: var(--folio-ink); }
+</style>

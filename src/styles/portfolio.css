@@ -1,14 +1,14 @@
 /* The homepage shares one quiet, editorial visual language from hero to footer. */
 .portfolio-page .folio-section { position: relative; border-top: 1px solid var(--folio-line); background: var(--folio-paper); }
 .folio-inner { max-width: 1200px; margin-inline: auto; padding: 110px 48px 120px; }
-.folio-heading { color: var(--folio-ink); font-size: clamp(38px, 4.3vw, 62px); font-weight: 400; line-height: 1.1; letter-spacing: -.05em; }
+.folio-heading { color: var(--folio-ink); font-size: clamp(38px, 4.3vw, 62px); font-weight: 400; line-height: 1.1; letter-spacing: -.04em; }
 .folio-heading em { color: var(--folio-muted); font-weight: 300; }
 .folio-section-heading { display: grid; grid-template-columns: 1fr .6fr; align-items: end; gap: 70px; margin-bottom: 76px; }
 .portfolio-page .folio-section p { color: var(--folio-muted); }
 .portfolio-page .folio-section a { font-weight: 400; }
 .portfolio-page a:focus-visible, .portfolio-page button:focus-visible { outline: 2px solid var(--folio-muted); outline-offset: 5px; }
-.portfolio-page .editorial-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; row-gap: 48px; align-items: start; }
-.editorial-gallery .project-item > a { background: #eeefec; border-radius: 5px; }
+.editorial-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; row-gap: 48px; align-items: start; }
+.editorial-gallery .project-item > a { background: #eeefec; border-radius: 6px; }
 .dark .editorial-gallery .project-item > a { background: #232927; }
 .editorial-gallery .project-item > a > div { aspect-ratio: 16 / 9; overflow: hidden; }
 .editorial-gallery .project-item img { width: 100%; height: 100%; object-fit: cover; }
@@ -24,13 +24,13 @@
 @media (max-width: 1023px) {
   .folio-inner { padding: 85px 7%; }
   .folio-section-heading { gap: 40px; grid-template-columns: 1fr 1fr; }
-  .portfolio-page .editorial-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  .editorial-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
 }
 @media (max-width: 700px) {
   .folio-inner { padding: 65px 26px 75px; }
   .folio-heading { font-size: clamp(34px, 8.5vw, 48px); }
   .folio-section-heading { grid-template-columns: 1fr; gap: 25px; margin-bottom: 45px; }
-  .portfolio-page .editorial-gallery { grid-template-columns: 1fr; gap: 48px; }
+  .editorial-gallery { grid-template-columns: 1fr; gap: 48px; }
   .journal-entry a { grid-template-columns: 24px 1fr; gap: 14px; }
   .journal-entry img { grid-column: 2; width: 100%; max-height: 160px; }
   .journal-entry a > div, .journal-entry time { grid-column: 2; }

@@ -132,7 +132,7 @@ const breadcrumbJsonLd = {
           tags={post.data.tags}
         />
 
-        <div class="mt-4 prose leading-relaxed prose-pre:max-w-full prose-base sm:prose-base md:prose-lg prose-h1:no-underline max-w-none prose-neutral dark:prose-invert prose-img:rounded-lg prose-headings:mb-4 prose-headings:scroll-mt-24 text-justify">
+        <div class="mt-4 prose leading-relaxed prose-pre:max-w-full prose-base sm:prose-base md:prose-lg prose-h1:no-underline max-w-none prose-neutral dark:prose-invert prose-img:rounded-lg prose-headings:mb-4 prose-headings:scroll-mt-24 text-left">
           <Content />
         </div>
 
@@ -167,6 +167,9 @@ const breadcrumbJsonLd = {
   </div>
 
   <style>
+    .content-wrapper { padding-top: 56px; }
+    .content-wrapper .prose { max-width: 68ch; margin-inline: auto; line-height: 1.85; }
+    .content-wrapper .prose :global(h2) { font-weight: 500; letter-spacing: -.025em; }
     @media (min-width: 1024px) {
       .content-wrapper {
         max-width: 800px;

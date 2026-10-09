@@ -5,26 +5,26 @@ import { aboutPage, footerData, socialLinks } from '@/data';
 ---
 
 <BaseLayout title="About" description={footerData.aboutAuthor} image="/profile.jpg">
-  <main class="container max-w-5xl mx-auto text-neutral-600 dark:text-neutral-400 px-4 sm:px-6 lg:px-8">
-    <section class="container mx-auto min-h-[32rem] py-8 sm:py-12 lg:py-16">
+  <main class="editorial-shell">
+    <section class="editorial-intro">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div class="text-center lg:text-left">
-          <h1 class="text-black dark:text-neutral-100 font-semibold leading-tight text-3xl sm:text-4xl md:text-5xl w-full">
+        <div class="lg:self-start">
+          <h1 class="editorial-title">
             {aboutPage.title}
           </h1>
-          <p class="dark:text-neutral-100 text-lg sm:text-xl mt-3">{aboutPage.description}</p>
+          <p class="editorial-description">{aboutPage.description}</p>
         </div>
 
         <div class="space-y-6 sm:space-y-8">
           <div>
-            <h2 class="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-3 sm:mb-4">About Me</h2>
-            <p class="dark:text-neutral-100 text-sm sm:text-base leading-relaxed text-justify">
+            <h2 class="text-xl sm:text-2xl font-normal text-neutral-800 dark:text-neutral-100 mb-3 sm:mb-4">About Me</h2>
+            <p class="dark:text-neutral-100 text-sm sm:text-base leading-loose">
               {aboutPage.aboutMe}
             </p>
           </div>
 
           <div>
-            <h2 class="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-100 mb-3 sm:mb-4">Connect</h2>
+            <h2 class="text-xl sm:text-2xl font-normal text-neutral-800 dark:text-neutral-100 mb-3 sm:mb-4">Connect</h2>
             <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3">
               <a class="inline-flex items-center justify-center gap-1 px-3 py-2 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-center text-xs sm:text-sm" href={socialLinks.githubLink} target="_blank" rel="noreferrer"><Icon name="mdi:github-box" class="h-4 w-4" />GitHub</a>
               <a class="inline-flex items-center justify-center gap-1 px-3 py-2 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-center text-xs sm:text-sm" href={socialLinks.linkedinLink} target="_blank" rel="noreferrer"><Icon name="mdi:linkedin" class="h-4 w-4" />LinkedIn</a>

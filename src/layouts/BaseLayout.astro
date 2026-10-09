@@ -5,6 +5,7 @@ import CodeBlockEnhancer from '@/components/CodeBlockEnhancer.astro';
 import ImageZoom from '@/components/ImageZoom.astro';
 import { seoData, socialLinks } from '@/data';
 import '@/styles/global.css';
+import '@/styles/portfolio.css';
 import 'lenis/dist/lenis.css';
 
 type JsonLd = Record<string, unknown>;
@@ -69,9 +70,7 @@ const structuredData = [...baseStructuredData, ...(Array.isArray(jsonLd) ? jsonL
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title={seoData.siteName} href={new URL('/rss.xml', seoData.mySite).toString()} />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:site_name" content={seoData.siteName} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content={ogType} />

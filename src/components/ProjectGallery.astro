@@ -27,7 +27,6 @@ const imagePath = (image: string) => `/img/projects/${image.includes('.') ? imag
         <div class="mt-6 border-t border-neutral-300 pt-5 dark:border-neutral-700">
           <div class="flex items-baseline justify-between gap-4">
             <div class="flex items-baseline gap-4">
-              <span class="font-mono text-xs text-neutral-400 dark:text-neutral-500">{String(index + 1).padStart(2, '0')}</span>
               <Heading class="text-lg font-semibold tracking-tight text-neutral-950 dark:text-white sm:text-xl">{project.name}</Heading>
             </div>
             {primaryUrl && (
@@ -69,3 +68,11 @@ const imagePath = (image: string) => `/img/projects/${image.includes('.') ? imag
     projectItems.forEach((item) => projectObserver.observe(item));
   }
 </script>
+
+<style>
+  .project-item { min-width: 0; }
+  .project-item h2, .project-item h3 { font-weight: 400; letter-spacing: -.025em; }
+  .project-item > a { border-radius: 6px; }
+  .project-item > div a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--folio-muted); }
+  .project-item > div a:hover { color: var(--folio-ink); }
+</style>

@@ -10,7 +10,6 @@ import PortfolioContact from '@/components/PortfolioContact.astro';
 import { projects } from '@/data/projects';
 import { formatDate, postUrl } from '@/utils/helper';
 import { postImage } from '@/utils/postImages';
-import '@/styles/portfolio.css';
 
 const featuredProjects = projects.slice(0, 6);
 const recentPosts = (await getCollection('blogs', ({ data }) => data.published))

@@ -16,11 +16,13 @@ const id = `running-text-${Math.random().toString(36).slice(2)}`;
 ---
 
 <div id={id} class:list={['running-text', className]} data-text={text} data-speed={speed} data-cursor-blink-speed={cursorBlinkSpeed}>
-  <span data-display></span>
-  <span data-cursor class="cursor ml-[2px]">|</span>
+  <span data-display>{text}</span>
+  <span data-cursor aria-hidden="true" class="cursor ml-[2px]">|</span>
 </div>
 
 <style>
+  @media (prefers-reduced-motion: reduce) { .cursor { display: none; } }
+
   .cursor-blink {
     animation: blink 1s infinite;
   }
@@ -36,7 +38,7 @@ const id = `running-text-${Math.random().toString(36).slice(2)}`;
   const display = root?.querySelector('[data-display]');
   const cursor = root?.querySelector('[data-cursor]');
 
-  if (root && display && cursor) {
+  if (root && display && cursor && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const text = root.dataset.text ?? '';
     const speed = Number(root.dataset.speed ?? 100);
     let currentIndex = 0;

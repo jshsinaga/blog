@@ -17,9 +17,9 @@ const { href, title, date, description, image, alt, tags } = Astro.props;
 const optimizedImage = postImage(image);
 ---
 
-<article class="md:h-48 group rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
-  <div class="grid grid-cols-1 md:grid-cols-10 gap-0 md:gap-1 min-h-[200px] md:h-40">
-    <a href={href} aria-label={title} class="md:col-span-3 h-36 md:h-full block">
+<article class="journal-card group">
+  <div class="journal-card-grid">
+    <a href={href} aria-label={title} class="journal-card-image">
       {optimizedImage ? (
         <Image
           src={optimizedImage}
@@ -46,14 +46,14 @@ const optimizedImage = postImage(image);
       )}
     </a>
 
-    <div class="md:col-span-7 p-4 sm:p-5 flex flex-col justify-between">
+    <div class="journal-card-copy">
       <div>
         <a href={href} class="block">
-          <h2 class="line-clamp-1 text-ellipsis text-lg sm:text-xl font-semibold text-black dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-400 leading-tight">
+          <h2 class="text-xl sm:text-2xl font-normal text-black dark:text-neutral-100 group-hover:text-neutral-600 dark:group-hover:text-neutral-400 leading-tight">
             {title}
           </h2>
         </a>
-        <p class="mt-1 text-ellipsis line-clamp-1 text-sm sm:text-base text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-500 dark:group-hover:text-neutral-400">
+        <p class="mt-3 line-clamp-2 text-sm sm:text-base text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-500 dark:group-hover:text-neutral-400">
           {description}
         </p>
 
@@ -61,9 +61,9 @@ const optimizedImage = postImage(image);
           {tags.slice(0, 3).map((tag) => (
             <a
               href={`/tags/${tagSlug(tag)}`}
-              class="rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 transition-colors hover:bg-neutral-300 dark:hover:bg-neutral-700"
+              class="rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 transition-colors hover:bg-neutral-300 dark:hover:bg-neutral-700"
             >
-              <span class="block px-2 py-1 text-xs font-semibold">{tag}</span>
+              <span class="block px-2 py-1 text-xs font-medium">{tag}</span>
             </a>
           ))}
           {tags.length > 3 && <span class="text-xs text-neutral-500 dark:text-neutral-400">+{tags.length - 3} more</span>}
@@ -79,3 +79,19 @@ const optimizedImage = postImage(image);
     </div>
   </div>
 </article>
+
+<style>
+  .journal-card { border-top: 1px solid var(--folio-line); padding-block: 28px; }
+  .journal-card-grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 32px; }
+  .journal-card-image { display: block; overflow: hidden; aspect-ratio: 16 / 10; border-radius: 6px; background: var(--folio-line); }
+  .journal-card-image img { transition: transform 250ms ease-out; }
+  .journal-card-image:hover img { transform: scale(1.025); }
+  .journal-card-copy { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+  .journal-card-copy h2 { letter-spacing: -.025em; line-height: 1.3; }
+  .journal-card-copy p { line-height: 1.6; color: var(--folio-muted); }
+  .journal-card-copy time { font-size: 12px; font-variant-numeric: tabular-nums; }
+  .journal-card-copy a { text-underline-offset: 5px; }
+  @media (max-width: 900px) { .journal-card-grid { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; } }
+  @media (max-width: 640px) { .journal-card-grid { grid-template-columns: 1fr; gap: 20px; } .journal-card-image { aspect-ratio: 16 / 9; } }
+  @media (prefers-reduced-motion: reduce) { .journal-card-image img { transition: none; } .journal-card-image:hover img { transform: none; } }
+</style>

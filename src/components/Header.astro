@@ -92,36 +92,33 @@ const isActive = (href: string) => {
 </header>
 
 <style>
-  .portfolio-header { background: var(--folio-paper); border-bottom: 0; padding-block: 25px; font-weight: 400; }
-  .portfolio-header .header-inner { max-width: 1440px; padding-inline: 8.5%; min-height: 42px; }
-  .portfolio-header nav { gap: 12px; }
-  .portfolio-header ul { position: absolute; left: 50%; transform: translateX(-50%); gap: 24px; font-size: 12px; }
-  .portfolio-header ul a { position: relative; padding-inline: 0; color: #707575; }
-  .portfolio-header ul a:hover, .portfolio-header ul .nav-active { color: #202222; }
-  .portfolio-header .nav-active::after { content: ''; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: currentColor; left: calc(50% - 2px); bottom: -6px; }
-  .talk-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 11px 23px; border: 1px solid #dedfdf; border-radius: 30px; font-size: 12px; white-space: nowrap; transition: background 200ms; }
-  .talk-link:hover { background: #eaeceb; }
-  .portfolio-header #search-open, .portfolio-header #theme-toggle { padding: 5px; color: #7a807e; }
-  .portfolio-header #search-open svg, .portfolio-header #theme-toggle svg { width: 15px; height: 15px; }
-  .portfolio-header a:focus-visible, .portfolio-header button:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
-  :global(.dark) .portfolio-header ul a { color: #a4aaa8; }
-  :global(.dark) .portfolio-header ul .nav-active { color: #f0f2f1; }
-  :global(.dark) .talk-link { border-color: #414745; }
-  :global(.dark) .talk-link:hover { background: #303634; }
-  @media (min-width: 701px) and (max-width: 1023px) {
-    .portfolio-header .header-inner { padding-inline: 6%; }
-    .portfolio-header ul { gap: 18px; left: 44%; }
-    .portfolio-header nav { gap: 5px; }
-    .talk-link { padding-inline: 16px; }
-  }
-  @media (max-width: 700px) {
-    .portfolio-header { padding-block: 16px; }
-    .portfolio-header .header-inner { padding-inline: 26px; }
+  .portfolio-header { background: var(--folio-paper); border-bottom: 1px solid var(--folio-line); padding-block: 16px; font-weight: 400; }
+  .portfolio-header .header-inner { max-width: 1200px; padding-inline: 48px; min-height: 44px; }
+  .portfolio-header nav { gap: 8px; }
+  .portfolio-header ul { position: absolute; left: 50%; transform: translateX(-50%); gap: 20px; font-size: 14px; }
+  .portfolio-header ul a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding-inline: 0; color: var(--folio-muted); }
+  .portfolio-header ul a:hover, .portfolio-header ul .nav-active { color: var(--folio-ink); }
+  .portfolio-header .nav-active::after { content: ''; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: currentColor; left: calc(50% - 2px); bottom: 2px; }
+  .talk-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: 1px solid var(--folio-line); border-radius: 30px; font-size: 13px; white-space: nowrap; transition: background 200ms; }
+  .talk-link:hover { background: var(--color-neutral-100); }
+  .portfolio-header #search-open, .portfolio-header #theme-toggle, .portfolio-header #mobile-menu-button { width: 44px; height: 44px; padding: 12px; color: var(--folio-muted); }
+  .portfolio-header #search-open svg, .portfolio-header #theme-toggle svg { width: 18px; height: 18px; }
+  :global(.dark) .talk-link:hover { background: var(--color-neutral-900); }
+  @media (max-width: 1100px) {
+    .portfolio-header .header-inner { padding-inline: 7%; }
     .portfolio-header ul { display: none; }
     .portfolio-header nav > .sm\:hidden { display: block; }
     .portfolio-header #mobile-menu:not(.hidden) { display: block; }
-    .talk-link { padding: 9px 14px; font-size: 11px; }
-    .portfolio-header nav { gap: 6px; }
+  }
+  @media (max-width: 700px) {
+    .portfolio-header { padding-block: 10px; }
+    .portfolio-header .header-inner { padding-inline: 24px; }
+    .portfolio-header nav { gap: 0; }
+    .talk-link { padding-inline: 12px; font-size: 12px; margin-right: 4px; }
+  }
+  @media (max-width: 359px) {
+    .portfolio-header .header-inner { padding-inline: 16px; }
+    .talk-link { padding-inline: 8px; gap: 4px; }
   }
 </style>
 

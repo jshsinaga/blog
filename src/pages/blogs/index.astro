@@ -9,11 +9,11 @@ import { postUrl } from '@/utils/helper';
 const posts = (await getCollection('blogs', ({ data }) => data.published))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+const categories = [...new Map(posts.flatMap((post) => post.data.tags).map((tag) => [tag.toLowerCase(), tag])).values()].sort();
 ---
 
 <BaseLayout title="Blog Archive" description="Browse all blog posts by category or search through the complete archive of articles.">
-  <div class="container max-w-5xl mx-auto text-neutral-600 dark:text-neutral-400 px-4 sm:px-6 lg:px-8">
+  <div class="editorial-shell journal-archive">
     <Hero />
 
     <section class="pt-6 pb-6 sm:pt-8">
@@ -23,7 +23,7 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 
     <div class="px-0 max-md:mt-4">
       <label class="sr-only" for="search-posts">Search posts</label>
-      <input id="search-posts" placeholder="Search" class="w-full rounded border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 px-4 py-3 text-neutral-900 dark:text-neutral-100" />
+      <input id="search-posts" type="search" placeholder="Search posts…" class="w-full rounded border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 px-4 py-3 text-neutral-900 dark:text-neutral-100" />
     </div>
 
     <section class="mt-6">
@@ -39,13 +39,13 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
         </button>
         {categories.map((category) => (
           <button type="button" data-category={category.toLowerCase()} class="category-button rounded px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-100">
-            {category} ({posts.filter((post) => post.data.tags.includes(category)).length})
+            {category} ({posts.filter((post) => post.data.tags.some((tag) => tag.toLowerCase() === category.toLowerCase())).length})
           </button>
         ))}
       </div>
     </section>
 
-    <section class="grid grid-cols-1 gap-4 sm:gap-6 mt-6" id="posts-list">
+    <section class="grid grid-cols-1 mt-10" id="posts-list">
       {posts.map((post) => (
         <div
           class="post-card"
@@ -66,11 +66,11 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
       ))}
     </section>
 
-    <p id="empty-state" class="hidden py-10 text-center text-neutral-600 dark:text-neutral-300">No posts found.</p>
+    <p id="empty-state" role="status" class="hidden py-10 text-center text-neutral-600 dark:text-neutral-300">No posts found.</p>
 
     <nav class="flex justify-center items-center mt-8 gap-2" aria-label="Pagination">
       <button id="prev-page" class="rounded border border-neutral-300 dark:border-neutral-700 px-3 py-2 disabled:opacity-50">Prev</button>
-      <span id="page-status" class="text-sm text-neutral-700 dark:text-neutral-300"></span>
+      <span id="page-status" aria-live="polite" class="text-sm text-neutral-700 dark:text-neutral-300"></span>
       <button id="next-page" class="rounded border border-neutral-300 dark:border-neutral-700 px-3 py-2 disabled:opacity-50">Next</button>
     </nav>
   </div>
@@ -93,6 +93,7 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
     const setButtonState = () => {
       categoryButtons.forEach((button) => {
         const active = button.dataset.category === selectedCategory;
+        button.setAttribute('aria-pressed', String(active));
         button.classList.toggle('bg-neutral-900', active);
         button.classList.toggle('text-white', active);
         button.classList.toggle('dark:bg-neutral-100', active);
@@ -150,4 +151,13 @@ const categories = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 
     update();
   </script>
+  <style>
+    .journal-archive > section:nth-of-type(2) { padding-top: 40px; }
+    .journal-archive > section:nth-of-type(2) h2 { font-size: 28px; font-weight: 400; letter-spacing: -.025em; }
+    #search-posts { border-color: var(--folio-line); border-radius: 6px; background: transparent; }
+    #category-buttons { gap: 8px; }
+    .category-button, #clear-filters { min-height: 40px; border-radius: 6px; padding-inline: 12px; }
+    .category-button[aria-pressed="true"] { background: var(--folio-ink); color: var(--folio-paper); }
+    #prev-page, #next-page { min-width: 64px; min-height: 44px; }
+  </style>
 </BaseLayout>
