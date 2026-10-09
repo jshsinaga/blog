@@ -23,5 +23,8 @@ jobs:
       - name: Check Astro
         run: bun run check
 
+      - name: Test related posts
+        run: bun test tests/related-posts.test.js
+
       - name: Build
         run: bun run build

@@ -43,10 +43,13 @@ Preserve the mobile menu and Escape-to-close behavior, search button ID `search-
 - Immediately below the hero, retain All Posts, archive search, category filters, clear/reset, tag navigation, the empty state, and pagination.
 - Sort published posts newest first.
 - Keep archive search and filtering local to the post list. Navbar search is the separate Pagefind modal; preserve both.
+- Keep a visible “Follow via RSS” link to `/rss.xml` alongside the All Posts heading.
 
 ### Article pages
 
 Retain article content, featured images, tags, dates, table of contents, code-copy controls, image zoom, sharing, comments, and SEO. Article pages use the same navbar and theme as the portfolio.
+
+After sharing and before comments, show up to three related published posts with matching tag slugs. Exclude the current article, prioritize shared tag count, then newest publication date. Omit the section when no topics match.
 
 Keep the table-of-contents open button below the sticky navbar. The open panel sits above the navbar and remains usable on mobile.
 

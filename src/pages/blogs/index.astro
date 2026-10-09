@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
 import PostCard from '@/components/PostCard.astro';
@@ -17,7 +18,13 @@ const categories = [...new Map(posts.flatMap((post) => post.data.tags).map((tag)
     <Hero />
 
     <section class="pt-6 pb-6 sm:pt-8">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black dark:text-neutral-100">{blogsPage.title}</h2>
+      <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black dark:text-neutral-100">{blogsPage.title}</h2>
+        <a href="/rss.xml" type="application/rss+xml" class="rss-link">
+          <Icon name="heroicons:rss" class="h-4 w-4" />
+          Follow via RSS
+        </a>
+      </div>
       <p class="mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300">{blogsPage.description}</p>
     </section>
 
@@ -152,6 +159,8 @@ const categories = [...new Map(posts.flatMap((post) => post.data.tags).map((tag)
     update();
   </script>
   <style>
+    .rss-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; color: var(--folio-ink); text-decoration: underline; text-decoration-color: var(--folio-line); text-underline-offset: 5px; }
+    .rss-link:hover { text-decoration-color: currentColor; }
     .journal-archive > section:nth-of-type(2) { padding-top: 40px; }
     .journal-archive > section:nth-of-type(2) h2 { font-size: 28px; font-weight: 400; letter-spacing: -.025em; }
     #search-posts { border-color: var(--folio-line); border-radius: 6px; background: transparent; }

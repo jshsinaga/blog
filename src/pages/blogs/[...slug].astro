@@ -5,20 +5,22 @@ import { Icon } from 'astro-icon/components';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import BlogHeader from '@/components/BlogHeader.astro';
 import CommentSection from '@/components/CommentSection.astro';
+import RelatedPosts from '@/components/RelatedPosts.astro';
 import Toc from '@/components/Toc.astro';
 import { seoData, socialLinks } from '@/data';
 import { postSlug, postUrl } from '@/utils/helper';
 import { postImage } from '@/utils/postImages';
+import { getRelatedPosts } from '@/utils/relatedPosts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blogs', ({ data }) => data.published);
   return posts.map((post) => ({
     params: { slug: postSlug(post.id) },
-    props: { post },
+    props: { post, relatedPosts: getRelatedPosts(post, posts) },
   }));
 }
 
-const { post } = Astro.props;
+const { post, relatedPosts } = Astro.props;
 const { Content, headings } = await render(post);
 const canonical = new URL(postUrl(post.id), seoData.mySite).toString();
 const shareUrl = canonical;
@@ -158,6 +160,8 @@ const breadcrumbJsonLd = {
             <span class="social-share-button__label">Share</span>
           </button>
         </div>
+
+        <RelatedPosts posts={relatedPosts} />
 
         <CommentSection />
       </article>

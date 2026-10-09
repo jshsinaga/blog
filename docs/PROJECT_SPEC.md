@@ -32,11 +32,12 @@ Use Bun:
 bun install
 bun run dev
 bun run check
+bun test tests/related-posts.test.js
 bun run build
 bun run preview
 ```
 
-Before finishing site changes, run `bun run check` and `bun run build`. The build runs `postbuild` (`pagefind --site dist`) and generates the Pagefind index in `dist/pagefind`. Navbar search results are available after a build; in development, the search modal shows a hint instead of results. Use a production preview when verifying Pagefind results.
+Before finishing site changes, run `bun run check`, `bun test tests/related-posts.test.js`, and `bun run build`. The build runs `postbuild` (`pagefind --site dist`) and generates the Pagefind index in `dist/pagefind`. Navbar search results are available after a build; in development, the search modal shows a hint instead of results. Use a production preview when verifying Pagefind results.
 
 ## Implementation conventions
 
