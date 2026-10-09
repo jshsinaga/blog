@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const icons: Record<string, string> = {
+  TypeScript: 'mdi:language-typescript',
+  Typescript: 'mdi:language-typescript',
+  Go: 'mdi:language-go',
+  Python: 'mdi:language-python',
+  Nuxt: 'mdi:nuxt',
+  'Nuxt 3': 'mdi:nuxt',
+  'Next.js': 'technology/nextdotjs',
+  NextJS: 'technology/nextdotjs',
+  Astro: 'technology/astro',
+  MongoDB: 'technology/mongodb',
+  PostgreSQL: 'technology/postgresql',
+  Flutter: 'technology/flutter',
+  Capacitor: 'technology/capacitor',
+  Firebase: 'mdi:firebase',
+  'Gemini API': 'technology/googlegemini',
+  'Whatsapp API': 'mdi:whatsapp',
+  React: 'mdi:react',
+  ReactJS: 'mdi:react',
+  Inertia: 'technology/inertia',
+  Vercel: 'technology/vercel',
+  Appwrite: 'technology/appwrite',
+  Electron: 'mdi:electron-framework',
+  ESP32: 'technology/espressif',
+  'C++': 'mdi:language-cpp',
+  'Telegram API': 'mdi:telegram',
+  Laravel: 'mdi:laravel',
+  MySQL: 'technology/mysql',
+  'Vue 3': 'mdi:vuejs',
+  JavaScript: 'mdi:language-javascript',
+  CSS: 'mdi:language-css3',
+  Pygame: 'mdi:controller-classic-outline',
+  OpenCV: 'technology/opencv',
+  'MIDI Controller': 'mdi:midi',
+  'Starback.js': 'mdi:creation',
+  HTML: 'mdi:language-html5',
+  AOS: 'mdi:animation-outline',
+  WindiCSS: 'technology/windicss',
+  'Motion One': 'mdi:motion-play-outline',
+  Dart: 'technology/dart',
+  JavaFX: 'mdi:language-java',
+  Java: 'mdi:language-java',
+  Kotlin: 'mdi:language-kotlin',
+  Android: 'mdi:android',
+};
+
+const icon = icons[name];
+if (!icon) throw new Error(`Missing technology icon for "${name}"`);
+---
+
+<span class="technology-label">
+  <Icon name={icon} aria-hidden="true" class="technology-icon" />
+  <span>{name}</span>
+</span>
+
+<style>
+  .technology-label { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .technology-icon { width: 14px; height: 14px; flex: none; }
+</style>

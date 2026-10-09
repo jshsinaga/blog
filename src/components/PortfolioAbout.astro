@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import TechnologyLabel from '@/components/TechnologyLabel.astro';
 const stats = [
   { value: '2+', label: 'Years of experience' },
   { value: '10+', label: 'Projects completed' },
@@ -27,7 +28,7 @@ const toolkit = ['TypeScript', 'Go', 'Python', 'Nuxt', 'Next.js', 'Astro', 'Mong
       </dl>
       <div class="about-toolkit">
         <h3>Tools I work with</h3>
-        <ul>{toolkit.map((tool) => <li>{tool}</li>)}</ul>
+        <ul>{toolkit.map((tool) => <li><TechnologyLabel name={tool} /></li>)}</ul>
       </div>
     </div>
   </div>

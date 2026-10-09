@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import TechnologyLabel from '@/components/TechnologyLabel.astro';
 import type { Project } from '@/types/projects';
 
 interface Props {
@@ -37,7 +38,9 @@ const imagePath = (image: string) => `/img/projects/${image.includes('.') ? imag
           </div>
           <p class="mt-4 max-w-xl leading-relaxed text-neutral-600 dark:text-neutral-400">{project.description}</p>
           <div class="mt-5 flex items-end justify-between gap-4">
-            <p class="font-mono text-xs leading-5 text-neutral-500 dark:text-neutral-400">{project.technologies.join(' · ')}</p>
+            <ul class="project-technologies text-xs leading-5 text-neutral-500 dark:text-neutral-400" aria-label="Tech stack">
+              {project.technologies.map((technology) => <li><TechnologyLabel name={technology} /></li>)}
+            </ul>
             {project.githubUrl && (
               <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.name} source code on GitHub`} class="shrink-0 text-neutral-400 transition-colors hover:text-neutral-950 dark:text-neutral-500 dark:hover:text-white">
                 <Icon name="mdi:github" class="h-5 w-5" />
@@ -71,6 +74,7 @@ const imagePath = (image: string) => `/img/projects/${image.includes('.') ? imag
 
 <style>
   .project-item { min-width: 0; }
+  .project-technologies { display: flex; flex-wrap: wrap; gap: 6px 12px; }
   .project-item h2, .project-item h3 { font-weight: 400; letter-spacing: -.025em; }
   .project-item > a { border-radius: 6px; }
   .project-item > div a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--folio-muted); }
