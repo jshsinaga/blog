@@ -29,13 +29,67 @@ export const projects: Project[] = [
         technologies: ["NextJS", "Vercel"],
     },
     {
-        name: "RekanKita",
+        name: "Horas Sinaga",
         description:
-            "An app to provide capital for freelancers. Inspired by Pin'J - Winning IDCamp 2024 Developer Challenge #2",
-        githubUrl: "https://github.com/jo0707/rekankita",
-        image: "rekankita",
-        url: "https://rekankita.itsjo.dev",
-        technologies: ["NextJS", "Gemini API", "Appwrite"],
+            "A community app for the Sinaga clan with events, member directory, marketplace, and genealogy, available on Android and web.",
+        githubUrl: "",
+        image: "horassinaga",
+        url: "",
+        technologies: ["React Native", "Expo", "TypeScript", "PocketBase", "Docker"],
+    },
+    {
+        name: "Maven Studio",
+        description:
+            "Website for a home recording studio in Medan, covering services, studio details, and session booking through WhatsApp.",
+        githubUrl: "",
+        image: "mavenstudio",
+        url: "https://mavenstudiomedan.vercel.app/",
+        technologies: ["Next.js", "React", "TypeScript", "Vercel"],
+    },
+    {
+        name: "Zyho Sinaga",
+        description:
+            "Portfolio site for musician Zyho Sinaga with a music catalog, gallery, and studio section.",
+        githubUrl: "",
+        image: "zyhosinaga",
+        url: "https://zyhosinaga.vercel.app",
+        technologies: ["Next.js", "TypeScript", "Vercel"],
+    },
+    {
+        name: "Maven Composer",
+        description:
+            "A web-based chord sheet composer with keyboard-first editing and Web MIDI playback to Yamaha PSR keyboards.",
+        githubUrl: "",
+        image: "chordposter",
+        url: "https://chordposter.vercel.app",
+        technologies: ["React", "TypeScript", "Vite", "Supabase", "Web MIDI"],
+    },
+    {
+        name: "Rintis",
+        description:
+            "An AI assistant for Indonesian small businesses to record sales, read cash flow, and generate promotional content. Built for the IDCamp Developer Challenge.",
+        githubUrl: "",
+        image: "rintis",
+        url: "https://rintis-liard.vercel.app",
+        technologies: ["Next.js", "TypeScript", "Supabase", "Gemini API", "Vercel"],
+    },
+    {
+        name: "PresenFace",
+        description:
+            "A face-recognition attendance system that verifies students from a webcam or uploaded photo and reports confidence scores.",
+        githubUrl: "https://github.com/jshsinaga/presenface-image-classification",
+        image: "presenface",
+        url: "",
+        technologies: ["Next.js", "TypeScript", "Python", "Firebase"],
+    },
+    {
+        name: "Indonesia Trans Network",
+        description:
+            "Corporate website for PT Indonesia Trans Network, presenting internet services, partnerships, and support channels.",
+        githubUrl: "",
+        image: "website-itn",
+        url: "https://website-itn.vercel.app",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel"],
     },
     {
         name: "VibeMix",
@@ -47,6 +101,15 @@ export const projects: Project[] = [
         technologies: ["NextJS", "Electron"],
     },
     {
+        name: "RekanKita",
+        description:
+            "An app to provide capital for freelancers. Inspired by Pin'J - Winning IDCamp 2024 Developer Challenge #2",
+        githubUrl: "https://github.com/jo0707/rekankita",
+        image: "rekankita",
+        url: "https://rekankita.itsjo.dev",
+        technologies: ["NextJS", "Gemini API", "Appwrite"],
+    },
+    {
         name: "Landslide Early Warning System",
         description:
             "Embedded System to detect landslides using ESP32 and sensors, with web dashboard, backend, and Telegram Alert.",
@@ -55,7 +118,6 @@ export const projects: Project[] = [
         url: "",
         technologies: ["ESP32", "C++", "ReactJS", "Python", "Firebase", "Telegram API"],
     },
-
     {
         name: "Banjar Agung Digitalization",
         description:
@@ -64,33 +126,6 @@ export const projects: Project[] = [
         image: "posyandu-banjar-agung",
         url: "",
         technologies: ["Laravel", "React", "MySQL"],
-    },
-
-    {
-        name: "Ketik Cepat!",
-        description:
-            "A typing speed training application while learning English and Indonesian language - Winning IDCamp 2023 Challenge",
-        githubUrl: "https://github.com/jo0707/ketikcepat",
-        image: "ketikcepat",
-        url: "https://ketikcepat.itsjo.dev",
-        technologies: ["Vue 3", "Nuxt 3", "JavaScript", "CSS"],
-    },
-    {
-        name: "The Adventure of Atra",
-        description:
-            "The Adventure of Atra is an adventure game to educate players about the rich culture of Sumatera.",
-        githubUrl: "https://github.com/jo0707/the-adventure-of-atra",
-        image: "atra",
-        url: "",
-        technologies: ["Python", "Pygame"],
-    },
-    {
-        name: "midiGesture",
-        description: "Application to control MIDI input with hand gestures using OpenCV.",
-        githubUrl: "https://github.com/jo0707/midiGesture",
-        image: "midigesture",
-        url: "",
-        technologies: ["Python", "OpenCV", "MIDI Controller"],
     },
     {
         name: "URL Shortener",
@@ -109,12 +144,38 @@ export const projects: Project[] = [
         technologies: ["Vue 3", "Nuxt 3", "Starback.js", "MongoDB"],
     },
     {
+        name: "Ketik Cepat!",
+        description:
+            "A typing speed training application while learning English and Indonesian language - Winning IDCamp 2023 Challenge",
+        githubUrl: "https://github.com/jo0707/ketikcepat",
+        image: "ketikcepat",
+        url: "https://ketikcepat.itsjo.dev",
+        technologies: ["Vue 3", "Nuxt 3", "JavaScript", "CSS"],
+    },
+    {
         name: "Yet Another Weather App",
         description: "minimal weather application providing weather data.",
         githubUrl: "https://github.com/jo0707/another-weather-app",
         image: "another-weather-app",
         url: "https://jo0707.github.io/another-weather-app/",
         technologies: ["HTML", "Typescript", "CSS"],
+    },
+    {
+        name: "midiGesture",
+        description: "Application to control MIDI input with hand gestures using OpenCV.",
+        githubUrl: "https://github.com/jo0707/midiGesture",
+        image: "midigesture",
+        url: "",
+        technologies: ["Python", "OpenCV", "MIDI Controller"],
+    },
+    {
+        name: "The Adventure of Atra",
+        description:
+            "The Adventure of Atra is an adventure game to educate players about the rich culture of Sumatera.",
+        githubUrl: "https://github.com/jo0707/the-adventure-of-atra",
+        image: "atra",
+        url: "",
+        technologies: ["Python", "Pygame"],
     },
     {
         name: "Zeitplan",
@@ -125,12 +186,28 @@ export const projects: Project[] = [
         technologies: ["Vue 3", "Nuxt 3", "AOS"],
     },
     {
+        name: "GitUsers",
+        description: "Android app to show Github users and details",
+        githubUrl: "https://github.com/jo0707/GitUsers",
+        image: "gitusers",
+        url: "",
+        technologies: ["Android", "Java", "Kotlin"],
+    },
+    {
         name: "Quizzler",
         description: "A quiz app made with Nuxt 3 and its ecosystem",
         githubUrl: "https://github.com/jo0707/quizzler",
         image: "quizzler",
         url: "https://quizzler.itsjo.dev/",
         technologies: ["Nuxt 3", "Vue 3", "TypeScript"],
+    },
+    {
+        name: "Text Explode Generator",
+        description: 'Tools to make text "explode" with CSS',
+        githubUrl: "https://github.com/jo0707/text-explode",
+        image: "explode",
+        url: "https://explode.itsjo.dev/",
+        technologies: ["CSS", "JavaScript"],
     },
     {
         name: "QRGen",
@@ -157,14 +234,6 @@ export const projects: Project[] = [
         technologies: ["Flutter", "Dart"],
     },
     {
-        name: "Text Explode Generator",
-        description: 'Tools to make text "explode" with CSS',
-        githubUrl: "https://github.com/jo0707/text-explode",
-        image: "explode",
-        url: "https://explode.itsjo.dev/",
-        technologies: ["CSS", "JavaScript"],
-    },
-    {
         name: "GreenCafe",
         description:
             "Cafe cashier application. Manage transactions, reports, menus, and users. Made with JavaFX and Kotlin",
@@ -172,67 +241,5 @@ export const projects: Project[] = [
         image: "greencafe",
         url: "",
         technologies: ["JavaFX", "Kotlin"],
-    },
-    {
-        name: "GitUsers",
-        description: "Android app to show Github users and details",
-        githubUrl: "https://github.com/jo0707/GitUsers",
-        image: "gitusers",
-        url: "",
-        technologies: ["Android", "Java", "Kotlin"],
-    },
-    {
-        name: "Rintis",
-        description:
-            "An AI assistant for Indonesian small businesses to record sales, read cash flow, and generate promotional content. Built for the IDCamp Developer Challenge.",
-        githubUrl: "",
-        image: "rintis",
-        url: "https://rintis-liard.vercel.app",
-        technologies: ["Next.js", "TypeScript", "Supabase", "Gemini API", "Vercel"],
-    },
-    {
-        name: "Indonesia Trans Network",
-        description:
-            "Corporate website for PT Indonesia Trans Network, presenting internet services, partnerships, and support channels.",
-        githubUrl: "",
-        image: "website-itn",
-        url: "https://website-itn.vercel.app",
-        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel"],
-    },
-    {
-        name: "Maven Composer",
-        description:
-            "A web-based chord sheet composer with keyboard-first editing and Web MIDI playback to Yamaha PSR keyboards.",
-        githubUrl: "",
-        image: "chordposter",
-        url: "https://chordposter.vercel.app",
-        technologies: ["React", "TypeScript", "Vite", "Supabase", "Web MIDI"],
-    },
-    {
-        name: "Zyho Sinaga",
-        description:
-            "Portfolio site for musician Zyho Sinaga with a music catalog, gallery, and studio section.",
-        githubUrl: "",
-        image: "zyhosinaga",
-        url: "https://zyhosinaga.vercel.app",
-        technologies: ["Next.js", "TypeScript", "Vercel"],
-    },
-    {
-        name: "Horas Sinaga",
-        description:
-            "A community app for the Sinaga clan with events, member directory, marketplace, and genealogy, available on Android and web.",
-        githubUrl: "",
-        image: "horassinaga",
-        url: "",
-        technologies: ["React Native", "Expo", "TypeScript", "PocketBase", "Docker"],
-    },
-    {
-        name: "PresenFace",
-        description:
-            "A face-recognition attendance system that verifies students from a webcam or uploaded photo and reports confidence scores.",
-        githubUrl: "https://github.com/jshsinaga/presenface-image-classification",
-        image: "presenface",
-        url: "",
-        technologies: ["Next.js", "TypeScript", "Python", "Firebase"],
     },
 ]

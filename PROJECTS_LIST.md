@@ -10,16 +10,14 @@ Dokumen kerja untuk 13 proyek yang dipilih. Status dicek langsung dari GitHub da
 | `SIAP` | Gambar kartu sudah tersedia di repo, belum ditambahkan |
 | `SIAP SCREENSHOT` | Demo publik aktif, tinggal ambil screenshot 16:9 |
 | `BUTUH AKSES` | Demo ada tapi di balik login |
-| `BUTUH KONFIRMASI` | Demo belum jelas atau isinya tidak cocok dengan repo |
 | `BUTUH GAMBAR` | Tidak ada demo publik dan tidak ada aset visual |
 
 ## Ringkasan
 
 | Status | Jumlah | Proyek |
 |---|---|---|
-| `SUDAH DITAMBAHKAN` | 6 | rintis, website-itn, chordposter, zyhosinaga, horassinaga, presenface |
+| `SUDAH DITAMBAHKAN` | 7 | rintis, website-itn, chordposter, zyhosinaga, horassinaga, presenface, mavenstudio |
 | `BUTUH AKSES` | 2 | documents-analyzer, esocare |
-| `BUTUH KONFIRMASI` | 1 | mavenstudio |
 | `BUTUH GAMBAR` | 4 | tasys-v3, maven-ai-studio, RSA-PVD, multimodal-mirex |
 
 ## Tabel utama
@@ -34,7 +32,7 @@ Dokumen kerja untuk 13 proyek yang dipilih. Status dicek langsung dari GitHub da
 | 6 | Maven AI Studio | `maven-ai-studio` | private | Tidak ada, aplikasi desktop Electron | Tidak ada | `BUTUH GAMBAR` | Tunda. Butuh screenshot aplikasi dari lokal |
 | 7 | Maven Composer | `chordposter` | private | LIVE `chordposter.vercel.app` | Screenshot live `chordposter.webp` | `SUDAH DITAMBAHKAN` | Masuk portofolio, tanpa link repo |
 | 8 | Zyho Sinaga | `zyhosinaga` | private | LIVE `zyhosinaga.vercel.app` | Screenshot live `zyhosinaga.webp` | `SUDAH DITAMBAHKAN` | Masuk portofolio. Konfirmasi izin karena ini situs klien |
-| 9 | Maven Studio | `mavenstudio` | private | LIVE `mavenstudio.vercel.app`, isi berbeda dari repo | 2 foto ilustrasi studio 1536x1024 | `BUTUH KONFIRMASI` | Tunda. Live site berisi "Premium Production Services" (3D/VFX), bukan home recording studio Medan seperti di repo |
+| 9 | Maven Studio | `mavenstudio` | private | LIVE `mavenstudiomedan.vercel.app` | Screenshot live `mavenstudio.webp` | `SUDAH DITAMBAHKAN` | Masuk portofolio dengan URL yang benar (`mavenstudiomedan`, bukan `mavenstudio`) |
 | 10 | RSA-PVD Steganography | `RSA-PVD-text-to-video-steganography` | public | Tidak ada hosted, Flask hanya lokal | `diagram.png` 578x2106 + sample input/output | `BUTUH GAMBAR` | Tunda. Butuh screenshot GUI PyQt6 atau web Flask dari lokal. Diagram bisa jadi gambar pendukung |
 | 11 | EsoCare | `esocare` | public | LIVE `esocare.vercel.app`, tetapi halaman login | Tidak ada | `BUTUH AKSES` | Tunda. Demo langsung masuk halaman login, bukan dashboard. Butuh akun demo untuk screenshot |
 | 12 | PresenFace | `presenface-image-classification` | public | HF Space merespons, frontend belum terkonfirmasi | `demo.webp` 800x381, screenshot UI asli | `SUDAH DITAMBAHKAN` | Masuk portofolio dengan link repo public. Demo publik belum ada |
@@ -110,9 +108,10 @@ Dokumen kerja untuk 13 proyek yang dipilih. Status dicek langsung dari GitHub da
 - Website home recording studio di Medan.
 - Stack: Next.js 16, React 19, TypeScript, App Router, Playwright, Vercel.
 - 1 commit, private.
-- Demo aktif: https://mavenstudio.vercel.app, tetapi isinya "Maven Studios | Premium Production Services" dengan layanan 3D modeling, product commercials, VFX, dan video editing. Tidak ada kata "Medan" dan tidak cocok dengan isi repo.
-- Gambar repo: `public/images/studio-microphone.webp`, `studio-room.webp` 1536x1024. Keduanya ilustrasi, bukan foto lokasi asli.
-- Aksi: konfirmasi apakah live site itu versi lain dari project yang sama, atau project terpisah.
+- Demo aktif: https://mavenstudiomedan.vercel.app/
+- Catatan: `mavenstudio.vercel.app` adalah situs lain ("Maven Studios | Premium Production Services"), bukan project ini.
+- Gambar: screenshot live, `public/img/projects/mavenstudio.webp`.
+- Status: sudah ditambahkan ke portofolio.
 
 ### 10. RSA-PVD Text-to-Video Steganography
 - Steganografi teks ke video dengan RSA dan Pixel Value Differencing.
@@ -155,21 +154,17 @@ Empat proyek ini belum punya aset visual sama sekali dan perlu kamu siapkan:
 3. `RSA-PVD-text-to-video-steganography`: hanya diagram arsitektur, tidak ada screenshot UI.
 4. `multimodal-mirex-classification`: hanya notebook, tidak ada gambar.
 
-Dua proyek menunggu akses atau konfirmasi:
+Dua proyek menunggu akses:
 
 5. `documents-analyzer---personal`: demo aktif tapi butuh login.
 6. `esocare`: demo aktif tapi halaman login, belum ada akun demo.
-
-Satu proyek menunggu konfirmasi isi:
-
-7. `mavenstudio`: live site aktif, tetapi isinya berbeda dari repo.
 
 ## Urutan penambahan
 
 | Gelombang | Proyek | Status |
 |---|---|---|
 | 1 | rintis, website-itn, chordposter, zyhosinaga, horassinaga, presenface | Selesai |
-| 2 | mavenstudio | Menunggu konfirmasi isi live site |
+| 2 | mavenstudio | Selesai |
 | 3 | documents-analyzer, esocare | Menunggu akun demo |
 | 4 | tasys-v3, maven-ai-studio, RSA-PVD, multimodal-mirex | Menunggu screenshot manual |
 
@@ -178,5 +173,5 @@ Satu proyek menunggu konfirmasi isi:
 - Semua screenshot kartu disimpan di `public/img/projects/<nama>.webp` dengan rasio 16:9.
 - Repo private tidak diberi `githubUrl`. Isi `url` dengan demo, atau biarkan kosong dengan gambar dan deskripsi sebagai case study.
 - Konfirmasi izin publikasi untuk proyek yang tampak milik klien atau organisasi: `website-itn`, `zyhosinaga`, `mavenstudio`, `documents-analyzer`.
-- `mavenstudio.vercel.app` sudah dikonfirmasi milik sendiri, tetapi isinya belum cocok dengan repo.
-- Enam proyek baru ditambahkan di akhir daftar `src/data/projects.ts`, sehingga homepage yang menampilkan 6 project pertama belum berubah.
+- URL Maven Studio yang benar adalah `https://mavenstudiomedan.vercel.app/`. `mavenstudio.vercel.app` adalah situs lain.
+- Urutan project: 3 teratas tetap (PMK, PPLK, Sidosari), sisanya diurutkan dari aktivitas repo terbaru. Tujuh proyek baru ada di urutan 4-10.
