@@ -181,4 +181,58 @@ export const projects: Project[] = [
         url: "",
         technologies: ["Android", "Java", "Kotlin"],
     },
+    {
+        name: "Rintis",
+        description:
+            "An AI assistant for Indonesian small businesses to record sales, read cash flow, and generate promotional content. Built for the IDCamp Developer Challenge.",
+        githubUrl: "",
+        image: "rintis",
+        url: "https://rintis-liard.vercel.app",
+        technologies: ["Next.js", "TypeScript", "Supabase", "Gemini API", "Vercel"],
+    },
+    {
+        name: "Indonesia Trans Network",
+        description:
+            "Corporate website for PT Indonesia Trans Network, presenting internet services, partnerships, and support channels.",
+        githubUrl: "",
+        image: "website-itn",
+        url: "https://website-itn.vercel.app",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel"],
+    },
+    {
+        name: "Maven Composer",
+        description:
+            "A web-based chord sheet composer with keyboard-first editing and Web MIDI playback to Yamaha PSR keyboards.",
+        githubUrl: "",
+        image: "chordposter",
+        url: "https://chordposter.vercel.app",
+        technologies: ["React", "TypeScript", "Vite", "Supabase", "Web MIDI"],
+    },
+    {
+        name: "Zyho Sinaga",
+        description:
+            "Portfolio site for musician Zyho Sinaga with a music catalog, gallery, and studio section.",
+        githubUrl: "",
+        image: "zyhosinaga",
+        url: "https://zyhosinaga.vercel.app",
+        technologies: ["Next.js", "TypeScript", "Vercel"],
+    },
+    {
+        name: "Horas Sinaga",
+        description:
+            "A community app for the Sinaga clan with events, member directory, marketplace, and genealogy, available on Android and web.",
+        githubUrl: "",
+        image: "horassinaga",
+        url: "",
+        technologies: ["React Native", "Expo", "TypeScript", "PocketBase", "Docker"],
+    },
+    {
+        name: "PresenFace",
+        description:
+            "A face-recognition attendance system that verifies students from a webcam or uploaded photo and reports confidence scores.",
+        githubUrl: "https://github.com/jshsinaga/presenface-image-classification",
+        image: "presenface",
+        url: "",
+        technologies: ["Next.js", "TypeScript", "Python", "Firebase"],
+    },
 ]
